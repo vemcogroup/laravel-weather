@@ -1,0 +1,54 @@
+{
+    "name": "vemcogroup/laravel-weather",
+    "description": "Weather package for Laravel to use different providers to get weather info",
+    "keywords": [
+        "darksy",
+        "laravel",
+        "weather",
+        "weatherstack"
+    ],
+    "homepage": "https://github.com/vemcogroup/laravel-weather",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Henrik B Hansen",
+            "email": "hbh@vemcount.com",
+            "homepage": "https://www.vemcogroup.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "ext-json": "*",
+        "spatie/geocoder": "^3.1",
+        "guzzlehttp/guzzle": "^6.3",
+        "laravel/framework": "^7.0",
+        "symfony/finder": "^4.3|^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0|^5.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vemcogroup\\Weather\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vemcogroup\\Weather\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vemcogroup\\Weather\\WeatherServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

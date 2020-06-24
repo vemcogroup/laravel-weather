@@ -1,0 +1,407 @@
+{
+    "request": {
+        "type": "LatLon",
+        "query": "Lat 55.36 and Lon 10.49",
+        "language": "en",
+        "unit": "m"
+    },
+    "location": {
+        "name": "Fraugde",
+        "country": "Denmark",
+        "region": "Syddanmark",
+        "lat": "55.350",
+        "lon": "10.500",
+        "timezone_id": "Europe/Copenhagen",
+        "localtime": "2020-06-22 15:12",
+        "localtime_epoch": 1592838720,
+        "utc_offset": "2.0"
+    },
+    "current": {
+        "observation_time": "01:12 PM",
+        "temperature": 21,
+        "weather_code": 116,
+        "weather_icons": [
+            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png"
+        ],
+        "weather_descriptions": [
+            "Partly cloudy"
+        ],
+        "wind_speed": 20,
+        "wind_degree": 280,
+        "wind_dir": "W",
+        "pressure": 1022,
+        "precip": 0.5,
+        "humidity": 53,
+        "cloudcover": 50,
+        "feelslike": 21,
+        "uv_index": 6,
+        "visibility": 10,
+        "is_day": "yes"
+    },
+    "forecast": {
+        "2020-01-01": {
+            "date": "2020-01-01",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-02": {
+            "date": "2020-01-02",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-03": {
+            "date": "2020-01-03",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-04": {
+            "date": "2020-01-04",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-05": {
+            "date": "2020-01-05",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-06": {
+            "date": "2020-01-06",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-01-07": {
+            "date": "2020-01-07",
+            "date_epoch": 1577836800,
+            "astro": [],
+            "mintemp": 3,
+            "maxtemp": 6,
+            "avgtemp": 4,
+            "totalsnow": 0,
+            "sunhour": 5.8,
+            "uv_index": 2,
+            "hourly": [
+                {
+                    "time": "0",
+                    "temperature": 3,
+                    "wind_speed": 15,
+                    "wind_degree": 270,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        [
+                            "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+                        ]
+                    ],
+                    "weather_descriptions": [
+                        [
+                            "Partly cloudy"
+                        ]
+                    ],
+                    "precip": 0,
+                    "humidity": 90,
+                    "visibility": 10,
+                    "pressure": 1031,
+                    "cloudcover": 15,
+                    "heatindex": 3,
+                    "dewpoint": 2,
+                    "windchilld": -1,
+                    "windgust": 29,
+                    "feelslike": -1,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 0,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        }
+    }
+}

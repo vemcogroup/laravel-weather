@@ -20,7 +20,7 @@ class WeatherstackTest extends WeatherTest
 
         $requests = [
             (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
-                ->atDate(Carbon::parse('2020-01-01 13:59'))
+                ->atDates([Carbon::parse('2020-01-01 13:59')])
                 ->withOption('units', 'si')
                 ->withOption('lang', 'en')
                 ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
@@ -39,11 +39,6 @@ class WeatherstackTest extends WeatherTest
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
         $this->addMockHandler(200, $this->getFile('weatherstack/forecast_response.json'));
-
-        $geocode['lat'] = 55.3632242;
-        $geocode['lng'] = 10.4896986;
-        $parameters['units'] = 'si';
-        $parameters['lang'] = 'en';
 
         $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
             ->withOption('units', 'si')

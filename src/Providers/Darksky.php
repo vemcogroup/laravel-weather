@@ -3,7 +3,6 @@
 namespace Vemcogroup\Weather\Providers;
 
 use Vemcogroup\Weather\Request;
-use Illuminate\Support\Facades\Cache;
 use Vemcogroup\Weather\Objects\Forecast;
 
 class Darksky extends Provider
@@ -12,11 +11,18 @@ class Darksky extends Provider
 
     public function getWeather($requests): array
     {
-        $builtRequest = $this->buildRequest($requests);
+        $responses = [];
+        $this->requests = $requests;
 
-        $responses = $this->processRequest($builtRequest['request_urls']);
+        $this->buildRequest();
+        $this->processRequests();
 
-        return array_merge($builtRequest['cached_result'], $responses);
+        /** @var Request $request */
+        foreach ($this->requests as $request) {
+            $responses[$request->getKey()] = $request->getResponse();
+        }
+
+        return $responses;
     }
 
     public function getForecast(Request $request): Forecast
@@ -27,32 +33,17 @@ class Darksky extends Provider
             . '/' . $request->getLatitude() . ',' . $request->getLongitude()
             . ($options ? "?$options" : '');
 
-        $key = md5('laravel-weather-' . $url);
+        $request->setUrl($url);
+        $this->requests[] = $request;
+        $this->processRequests();
 
-        if (!($cachedResponse = Cache::get($key))) {
-            $response = ($this->client->request('GET', $url))->getBody();
-
-            Cache::put(
-                md5('laravel-weather-' . $url),
-                json_decode($response),
-                now()->addDay()
-            );
-        } else {
-            $response = $cachedResponse;
-        }
-
-        return new Forecast(json_decode($response, true));
+        return new Forecast(json_decode($this->requests[0]->getResponse('string'), true));
     }
 
-    private function buildRequest($requests): array
+    private function buildRequest(): void
     {
-        $result = [
-            'request_urls' => [],
-            'cached_result' => [],
-        ];
-
         /** @var Request $request **/
-        foreach ($requests as $request) {
+        foreach ($this->requests as $request) {
 
             $time = $request->getTimestamp();
             $latitude = $request->getLatitude();
@@ -68,20 +59,12 @@ class Darksky extends Provider
 
             $options = $request->getHttpQuery();
 
-            $requestUrl = $this->url . $this->apiKey
+            $url = $this->url . $this->apiKey
                 . "/$latitude,$longitude"
                 . ($time ? ",$time" : '')
                 . ($options ? "?$options" : '');
 
-            $key = md5('laravel-weather-' . $requestUrl);
-
-            if (!($cacheResult = Cache::get($key))) {
-                $result['request_urls'][$request->getKey()] = $requestUrl;
-            } else {
-                $result['cached_result'][$request->getKey()] = $cacheResult;
-            }
+            $request->setUrl($url);
         }
-
-        return $result;
     }
 }

@@ -1,25 +1,25 @@
 {
-    "latitude": 55.3632242,
-    "longitude": 10.4896986,
+    "latitude": 55.35,
+    "longitude": 10.5,
     "timezone": "Europe/Copenhagen",
     "currently": {
-        "time": 1577883540,
-        "summary": "Clear",
-        "icon": "clear-day",
+        "time": 1577887140,
+        "summary": "Partly cloudy",
+        "icon": "partly-cloudy-day",
         "precipIntensity": 0,
         "precipProbability": 0,
-        "temperature": 4.61,
-        "apparentTemperature": 0.09,
-        "dewPoint": 0.25,
-        "humidity": 0.73,
-        "pressure": 1029.5,
-        "windSpeed": 6.8,
-        "windGust": 12.08,
-        "windBearing": 261,
-        "cloudCover": 0.08,
-        "uvIndex": 0,
-        "visibility": 16.093,
-        "ozone": 288.8
+        "temperature": 3,
+        "apparentTemperature": -1,
+        "dewPoint": 2,
+        "humidity": 90,
+        "pressure": 1031,
+        "windSpeed": 15,
+        "windGust": 29,
+        "windBearing": 270,
+        "cloudCover": 15,
+        "uvIndex": 1,
+        "visibility": 10,
+        "ozone": 0
     },
-    "offset": 1
+    "offset": "2.0"
 }

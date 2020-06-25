@@ -6,8 +6,10 @@ namespace Vemcogroup\Weather\Providers;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Client;
 use Vemcogroup\Weather\Request;
+use GuzzleHttp\Promise\EachPromise;
 use Illuminate\Support\Facades\Cache;
 use Vemcogroup\Weather\Objects\Forecast;
+use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
@@ -18,10 +20,13 @@ abstract class Provider
     protected $url;
     protected $apiKey;
     protected $client;
+    protected $requests;
     protected $threads = 50;
 
     public function __construct()
     {
+        $this->requests = [];
+
         if (!$this->apiKey = config('weather.api_key')) {
             throw WeatherException::noApiKey();
         }
@@ -32,30 +37,34 @@ abstract class Provider
     abstract public function getWeather($requests): array;
     abstract public function getForecast(Request $request): Forecast;
 
-    protected function processRequest($requestUrls): array
+    protected function processRequests(): void
     {
-        $requests = [];
-        $responses = [];
+       $promises = (function() {
+            /** @var Request $request */
+            foreach ($this->requests as $request) {
+                if ($cachedResponse = $request->getCacheResponse()) {
+                    $request->setResponse($cachedResponse);
+                    yield new FulfilledPromise($cachedResponse);
+                    continue;
+                }
 
-        foreach ($requestUrls as $key => $url) {
-            $requests[$key] = new GuzzleRequest('GET', $url);
-        }
+                yield $this->client->getAsync($request->getUrl())->then(function (GuzzleResponse $response) use ($request) {
+                    $content = json_decode($response->getBody());
+                    Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, now()->addDay());
+                    $request->setResponse($content);
+                });
 
-        $pool = new Pool($this->client, $requests, [
+                $urls[$request->getKey()] = new GuzzleRequest('GET', $request->getUrl());
+            }
+        })();
+
+        $eachPromise = new EachPromise($promises, [
             'concurrency' => $this->threads,
-            'fulfilled' => function (GuzzleResponse $response, $key) use (&$responses, $requests) {
-                $content = json_decode($response->getBody());
-                $responses[$key] = $content;
-                Cache::put(md5('laravel-weather-' . $requests[$key]->getUri()), $content, now()->addDay());
-            },
-            'rejected' => function (RequestException $reason, $index) {
+            'fulfilled' => function ($profile) {},
+            'rejected' => function ($reason) {
                 throw WeatherException::communicationError($reason);
             }
         ]);
-
-        $promise = $pool->promise();
-        $promise->wait();
-
-        return $responses;
+        $eachPromise->promise()->wait();
     }
 }

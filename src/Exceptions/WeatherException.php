@@ -16,6 +16,11 @@ class WeatherException extends Exception
         return new static('Missing WEATHER_PROVIDER, please add it in .env');
     }
 
+    public static function noUrl(): self
+    {
+        return new static('No url provided, please set url');
+    }
+
     public static function wrongProvider(): self
     {
         return new static('Wrong WEATHER_PROVIDER, please check README for valid providers');

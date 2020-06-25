@@ -12,18 +12,25 @@ use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
 {
+    public $url;
+    public $key;
+
     /** @var Carbon $time */
     public $date;
+
+    public $dates;
     public $address;
     public $timezone;
-    public $key;
 
     protected $geocode;
     protected $options;
 
+    protected $response;
+
     public function __construct(string $address)
     {
         try {
+            $this->dates = [];
             $this->address = $address;
             $this->lookupGeocode();
         } catch (WeatherException $e) {
@@ -57,6 +64,11 @@ class Request
         return 'JSON_STRING';
     }
 
+    public function getCacheResponse(): ?string
+    {
+        return Cache::get(md5('laravel-weather-' . $this->url));
+    }
+
     public function getLongitude()
     {
         return $this->geocode['lng'] ?? null;
@@ -71,6 +83,11 @@ class Request
     public function getDate(): ?Carbon
     {
         return $this->date ?? null;
+    }
+
+    public function getDates(): array
+    {
+        return $this->dates;
     }
 
     public function getTimestamp(): int
@@ -105,6 +122,13 @@ class Request
         return $this;
     }
 
+    public function atDates(array $dates): Request
+    {
+        $this->dates = $dates;
+
+        return $this;
+    }
+
     public function atDate(Carbon $date): Request
     {
         $this->date = $date;
@@ -117,5 +141,39 @@ class Request
         $this->key = $key;
 
         return $this;
+    }
+
+    public function setResponse($response): void
+    {
+        $this->response = $response;
+    }
+
+    public function getResponse($asType = null)
+    {
+        if($asType === 'array') {
+            return (array) $this->response;
+        }
+
+        if ($asType === 'string') {
+            return json_encode((array) $this->response);
+        }
+
+        return $this->response;
+    }
+
+    public function setUrl(string $url): Request
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    public function getUrl()
+    {
+        if (! $this->url) {
+            throw WeatherException::noUrl();
+        }
+
+        return $this->url;
     }
 }

@@ -16,16 +16,16 @@ class DarkskyTest extends WeatherTest
     public function itShouldReturnCorrectWeatherData(): void
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
-        $this->addMockHandler(200, $this->getFile('darksky/timemachine_response.json'));
+        $this->addMockHandler(200, $this->getFile('darksky/timemachine_response_1.json'));
+        $this->addMockHandler(200, $this->getFile('darksky/timemachine_response_2.json'));
 
         $requests = [
             (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
-                ->atDate(Carbon::parse('2020-01-01 13:59'))
+                ->atDates([Carbon::parse('2020-01-01 13:59'), Carbon::parse('2020-01-02 13:59')])
                 ->withOption('units', 'si')
                 ->withOption('lang', 'en')
                 ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
-                ->withTimezone('Europe/Copenhagen')
-                ->withKey('2020-01-01 13:59'),
+                ->withTimezone('Europe/Copenhagen'),
         ];
 
         $response = (new Darksky)->getWeather($requests);

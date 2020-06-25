@@ -1,0 +1,25 @@
+{
+    "latitude": 55.35,
+    "longitude": 10.5,
+    "timezone": "Europe/Copenhagen",
+    "currently": {
+        "time": 1577887140,
+        "summary": "Partly cloudy",
+        "icon": "partly-cloudy-day",
+        "precipIntensity": 0,
+        "precipProbability": 0,
+        "temperature": 3,
+        "apparentTemperature": -1,
+        "dewPoint": 2,
+        "humidity": 90,
+        "pressure": 1031,
+        "windSpeed": 15,
+        "windGust": 29,
+        "windBearing": 270,
+        "cloudCover": 15,
+        "uvIndex": 1,
+        "visibility": 10,
+        "ozone": 0
+    },
+    "offset": "2.0"
+}

@@ -2,6 +2,7 @@
 
 namespace Vemcogroup\Weather\Providers;
 
+use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
 use Vemcogroup\Weather\Objects\Forecast;
 
@@ -19,7 +20,7 @@ class Darksky extends Provider
 
         /** @var Request $request */
         foreach ($this->requests as $request) {
-            $responses[$request->getKey()] = $request->getResponse();
+            $responses[$request->getKey()] = $request->getForecast();
         }
 
         return $responses;
@@ -37,18 +38,30 @@ class Darksky extends Provider
         $this->requests[] = $request;
         $this->processRequests();
 
-        return new Forecast(json_decode($this->requests[0]->getResponse('string'), true));
+        return $this->requests[0]->getForecast();
     }
 
     private function buildRequest(): void
     {
+        $requests = [];
+
         /** @var Request $request **/
         foreach ($this->requests as $request) {
-
-            $time = $request->getTimestamp();
             $latitude = $request->getLatitude();
             $longitude = $request->getLongitude();
+            $options = $request->getHttpQuery();
 
+            /** @var Carbon $date */
+            foreach($request->getDates() as $date) {
+                $dateRequest = clone $request;
+                $url = $this->url . $this->apiKey
+                    . "/$latitude,$longitude"
+                    . ",$date->timestamp"
+                    . ($options ? "?$options" : '');
+                $dateRequest->setKey($date->format('Y-m-d H:i'));
+                $dateRequest->setUrl($url);
+                $requests[] = $dateRequest;
+            }
            /* if (!empty($request['time'])) {
                 $currentTimezone = config('app.timezone');
                 //$currentTimezone = user() && user()->user_timezone ? user()->user_timezone : config('app.timezone');
@@ -56,15 +69,10 @@ class Darksky extends Provider
                 $dateConverted->setTimezone(new \DateTimeZone($currentTimezone));
                 $time = $dateConverted->getTimestamp();
             }*/
+        }
 
-            $options = $request->getHttpQuery();
-
-            $url = $this->url . $this->apiKey
-                . "/$latitude,$longitude"
-                . ($time ? ",$time" : '')
-                . ($options ? "?$options" : '');
-
-            $request->setUrl($url);
+        if(count($requests)) {
+            $this->requests = $requests;
         }
     }
 }

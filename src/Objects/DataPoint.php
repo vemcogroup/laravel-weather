@@ -28,77 +28,81 @@ class DataPoint
 
     public function __construct($data)
     {
-        if (isset($data['time'])) {
-            $this->time = new Carbon($data['time']);
+        if (is_array($data)) {
+            $data = (object) $data;
         }
-        if (isset($data['summary'])) {
-            $this->summary = $data['summary'];
+
+        if (isset($data->time)) {
+            $this->time = Carbon::parse($data->time);
         }
-        if (isset($data['icon'])) {
-            $this->icon = $data['icon'];
+        if (isset($data->summary)) {
+            $this->summary = $data->summary;
         }
-        if (isset($data['sunriseTime'])) {
-            $this->sunriseTime = new Carbon($data['sunriseTime']);
+        if (isset($data->icon)) {
+            $this->icon = $data->icon;
         }
-        if (isset($data['sunsetTime'])) {
-            $this->sunsetTime = new Carbon($data['sunsetTime']);
+        if (isset($data->sunriseTime)) {
+            $this->sunriseTime = Carbon::parse($data->sunriseTime);
         }
-        if (isset($data['moonPhase'])) {
-            $this->moonPhase = $data['moonPhase'];
+        if (isset($data->sunsetTime)) {
+            $this->sunsetTime = Carbon::parse($data->sunsetTime);
         }
-        if (isset($data['nearestStormDistance'])) {
-            $this->nearestStormDistance = $data['nearestStormDistance'];
+        if (isset($data->moonPhase)) {
+            $this->moonPhase = $data->moonPhase;
         }
-        if (isset($data['nearestStormBearing'])) {
-            $this->nearestStormBearing = $data['nearestStormBearing'];
+        if (isset($data->nearestStormDistance)) {
+            $this->nearestStormDistance = $data->nearestStormDistance;
+        }
+        if (isset($data->nearestStormBearing)) {
+            $this->nearestStormBearing = $data->nearestStormBearing;
         }
 
         $this->precipitation = new Precipitation(
-            ($data['precipIntensity'] ?? null),
-            ($data['precipIntensityMax'] ?? null),
-            ($data['precipIntensityMaxTime'] ?? null),
-            ($data['precipProbability'] ?? null),
-            ($data['precipType'] ?? null),
-            ($data['precipAccumulation'] ?? null)
+            ($data->precipIntensity ?? null),
+            ($data->precipIntensityMax ?? null),
+            ($data->precipIntensityMaxTime ?? null),
+            ($data->precipProbability ?? null),
+            ($data->precipType ?? null),
+            ($data->precipAccumulation ?? null)
         );
         $this->temperature = new Temperature(
-            ($data['temperature'] ?? null),
-            ($data['temperatureMin'] ?? null),
-            ($data['temperatureMinTime'] ?? null),
-            ($data['temperatureMax'] ?? null),
-            ($data['temperatureMaxTime'] ?? null)
+            ($data->temperature ?? null),
+            ($data->temperatureMin ?? null),
+            ($data->temperatureMinTime ?? null),
+            ($data->temperatureMax ?? null),
+            ($data->temperatureMaxTime ?? null)
         );
         $this->apparentTemperature = new Temperature(
-            ($data['apparentTemperature'] ?? null),
-            ($data['apparentTemperatureMin'] ?? null),
-            ($data['apparentTemperatureMinTime'] ?? null),
-            ($data['apparentTemperatureMax'] ?? null),
-            ($data['apparentTemperatureMaxTime'] ?? null)
+            ($data->apparentTemperature ?? null),
+            ($data->apparentTemperatureMin ?? null),
+            ($data->apparentTemperatureMinTime ?? null),
+            ($data->apparentTemperatureMax ?? null),
+            ($data->apparentTemperatureMaxTime ?? null)
         );
 
-        if (isset($data['dewPoint'])) {
-            $this->dewPoint = $data['dewPoint'];
+        if (isset($data->dewPoint)) {
+            $this->dewPoint = $data->dewPoint;
         }
-        if (isset($data['windSpeed'])) {
-            $this->windSpeed = $data['windSpeed'];
+        if (isset($data->windSpeed)) {
+            $this->windSpeed = $data->windSpeed;
         }
-        if (isset($data['windBearing'])) {
-            $this->windBearing = $data['windBearing'];
+        if (isset($data->windBearing)) {
+            $this->windBearing = $data->windBearing;
         }
-        if (isset($data['cloudCover'])) {
-            $this->cloudCover = $data['cloudCover'];
+        if (isset($data->cloudCover)) {
+            $this->cloudCover = $data->cloudCover;
         }
-        if (isset($data['humidity'])) {
-            $this->humidity = $data['humidity'];
+        if (isset($data->humidity)) {
+            $this->humidity = $data->humidity;
         }
-        if (isset($data['pressure'])) {
-            $this->pressure = $data['pressure'];
+        if (isset($data->pressure)) {
+            $this->pressure = $data->pressure;
         }
-        if (isset($data['visibility'])) {
-            $this->visibility = $data['visibility'];
+        if (isset($data->visibility)) {
+            $this->visibility = $data->visibility;
         }
-        if (isset($data['ozone'])) {
-            $this->ozone = $data['ozone'];
+        if (isset($data->ozone)) {
+            $this->ozone = $data->ozone;
         }
     }
 

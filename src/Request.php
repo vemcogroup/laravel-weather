@@ -1,30 +1,23 @@
 <?php
 
-
 namespace Vemcogroup\Weather;
 
-
-use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder;
 use Illuminate\Support\Facades\Cache;
+use Vemcogroup\Weather\Objects\Forecast;
 use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
 {
     public $url;
     public $key;
-
-    /** @var Carbon $time */
-    public $date;
-
     public $dates;
     public $address;
     public $timezone;
 
     protected $geocode;
     protected $options;
-
     protected $response;
 
     public function __construct(string $address)
@@ -80,32 +73,14 @@ class Request
         return $this->geocode['lat'] ?? null;
     }
 
-    public function getDate(): ?Carbon
-    {
-        return $this->date ?? null;
-    }
-
     public function getDates(): array
     {
         return $this->dates;
     }
 
-    public function getTimestamp(): int
-    {
-        return $this->date ? $this->date->timestamp : now()->timestamp;
-    }
-
     public function getKey(): ?string
     {
-        if ($this->key) {
-            return $this->key;
-        }
-
-        if ($this->date) {
-            return $this->date->format('Y-m-d H:i');
-        }
-
-        return null;
+        return $this->key;
     }
 
     public function withOption(string $name, $value = null): Request
@@ -129,14 +104,7 @@ class Request
         return $this;
     }
 
-    public function atDate(Carbon $date): Request
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function withKey(string $key): Request
+    public function setKey(string $key): Request
     {
         $this->key = $key;
 
@@ -159,6 +127,11 @@ class Request
         }
 
         return $this->response;
+    }
+
+    public function getForecast(): Forecast
+    {
+        return new Forecast((object) $this->response);
     }
 
     public function setUrl(string $url): Request

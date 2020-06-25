@@ -20,12 +20,11 @@ class WeatherstackTest extends WeatherTest
 
         $requests = [
             (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
-                ->atDates([Carbon::parse('2020-01-01 13:59')])
+                ->atDates([Carbon::parse('2020-01-01 13:59'), Carbon::parse('2020-01-02 13:59')])
                 ->withOption('units', 'si')
                 ->withOption('lang', 'en')
                 ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
-                ->withTimezone('Europe/Copenhagen')
-                ->withKey('2020-01-01 13:59'),
+                ->withTimezone('Europe/Copenhagen'),
          ];
 
         $response = (new Weatherstack)->getWeather($requests);

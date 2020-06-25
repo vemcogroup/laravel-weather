@@ -6,50 +6,45 @@ use Carbon\CarbonTimeZone;
 
 class Forecast
 {
-    private $latitude;
-    private $longitude;
-    private $timezone;
-    private $offset;
-    private $currently;
-    private $minutely;
-    private $hourly;
     private $daily;
-    private $cacheTTL;
-    private $responseTime;
+    private $hourly;
+    private $timezone;
+    private $minutely;
+    private $currently;
+    private $offset = 0;
+    private $latitude = 0.0;
+    private $longitude = 0.0;
 
-    /**
-     * @param  array  $forecastData
-     * @param  int|null  $cacheTTL
-     * @param  int|null  $responseTime
-     */
-    public function __construct($forecastData, $cacheTTL = null, $responseTime = null)
+    public function __construct($data)
     {
-        if (isset($forecastData['latitude'])) {
-            $this->latitude = $forecastData['latitude'];
+        if (is_array($data)) {
+            $data = (object) $data;
         }
-        if (isset($forecastData['longitude'])) {
-            $this->longitude = $forecastData['longitude'];
+
+        if (isset($data->latitude)) {
+            $this->latitude = $data->latitude;
         }
-        if (isset($forecastData['timezone'])) {
-            $this->timezone = new CarbonTimeZone($forecastData['timezone']);
+        if (isset($data->longitude)) {
+            $this->longitude = $data->longitude;
         }
-        if (isset($forecastData['offset'])) {
-            $this->offset = $forecastData['offset'];
+        if (isset($data->timezone)) {
+            $this->timezone = new CarbonTimeZone($data->timezone);
         }
-        if (isset($forecastData['currently'])) {
-            $this->currently = new DataPoint($forecastData['currently']);
+        if (isset($data->offset)) {
+            $this->offset = $data->offset;
         }
-        if (isset($forecastData['minutely'])) {
-            $this->minutely = new DataBlock($forecastData['minutely']);
+        if (isset($data->currently)) {
+            $this->currently = new DataPoint($data->currently);
         }
-        if (isset($forecastData['hourly'])) {
-            $this->hourly = new DataBlock($forecastData['hourly']);
+        if (isset($data->minutely)) {
+            $this->minutely = new DataBlock($data->minutely);
         }
-        if (isset($forecastData['daily'])) {
-            $this->daily = new DataBlock($forecastData['daily']);
+        if (isset($data->hourly)) {
+            $this->hourly = new DataBlock($data->hourly);
         }
-        $this->cacheTTL = $cacheTTL;
-        $this->responseTime = $responseTime;
+        if (isset($data->daily)) {
+            $this->daily = new DataBlock($data->daily);
+        }
     }
 
     public function getLatitude(): float

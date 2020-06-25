@@ -18,7 +18,7 @@ class WeatherException extends Exception
 
     public static function noUrl(): self
     {
-        return new static('No url provided, please set url');
+        return new static('No url provided');
     }
 
     public static function wrongProvider(): self

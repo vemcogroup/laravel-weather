@@ -6,19 +6,19 @@ use Carbon\Carbon;
 
 class Precipitation
 {
-    private $intensity;
-    private $maxIntensity;
-    private $maxIntensityTime;
-    private $probability;
     private $type;
+    private $intensity;
+    private $probability;
+    private $maxIntensity;
     private $accumulation;
+    private $maxIntensityTime;
 
     public function __construct($intensity, $maxIntensity, $maxIntensityTime, $probability, $type, $accumulation)
     {
         $this->intensity = $intensity;
         $this->maxIntensity = $maxIntensity;
         if (!is_null($maxIntensityTime)) {
-            $this->maxIntensityTime = new Carbon($maxIntensityTime);
+            $this->maxIntensityTime = Carbon::parse($maxIntensityTime);
         }
         $this->probability = $probability;
         $this->type = $type;

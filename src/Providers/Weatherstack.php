@@ -53,17 +53,18 @@ class Weatherstack extends Provider
         /** @var Request $request */
         foreach ($this->requests as $request) {
             $response = $request->getResponse();
+
             if (isset($response->historical)) {
                 foreach ($response->historical as $dateKey => $responseData) {
                     /** @var Carbon $date */
                     foreach ($request->getDates() as $date) {
                         $hour = $date->hour;
                         $responseHour = $responseData->hourly;
-                        $formattedResponses[$date->format('Y-m-d H:i')] = (object) ([
+                        $formattedResponses[$date->format('Y-m-d H:i')] = new Forecast([
                             'latitude' => (float) $response->location->lat,
                             'longitude' => (float) $response->location->lon,
                             'timezone' => $response->location->timezone_id,
-                            'currently' => (object) [
+                            'currently' => [
                                 'time' => $date->timestamp,
                                 'summary' => $responseHour[$hour]->weather_descriptions[0][0],
                                 'icon' => self::mapWeatherIcon($responseHour[$hour]->weather_code),
@@ -86,33 +87,35 @@ class Weatherstack extends Provider
                         ]);
                     }
                 }
+
             } else {
+
                 $time = Carbon::parse('g:i a', $response->current->observation_time)->format('H:i');
                 $key = explode(' ', $response->location->localtime)[0] . ' ' . $time;
 
                 $current = $response['current'];
 
-                $formattedResponses[$key] = (object) ([
+                $formattedResponses[$key] = new Forecast([
                     'latitude' => (float) $response->location->lat,
                     'longitude' => (float) $response->location->lon,
                     'timezone' => $response->location->timezone_id,
                     'currently' => [
                         'time' => $time,
-                        'summary' => $current['weather_descriptions'][0],
-                        'icon' => $current['weather_icons'][0],
-                        'precipIntensity' => $current['precip'],
+                        'summary' => $current->weather_descriptions[0],
+                        'icon' => $current->weather_icons[0],
+                        'precipIntensity' => $current->precip,
                         'precipProbability' => 0,                           // Not available
-                        'temperature' => $current['temperature'],
-                        'apparentTemperature' => $current['feelslike'],
+                        'temperature' => $current->temperature,
+                        'apparentTemperature' => $current->feelslike,
                         'dewPoint' => 0,                                    // Not available
-                        'humidity' => $current['humidity'],
-                        'pressure' => $current['pressure'],
-                        'windSpeed' => $current['wind_speed'],
+                        'humidity' => $current->humidity,
+                        'pressure' => $current->pressure,
+                        'windSpeed' => $current->wind_speed,
                         'windGust' => 0,                                    // Not available
-                        'windBearing' => $current['wind_degree'],
-                        'cloudCover' => $current['cloudcover'],
-                        'uvIndex' => $current['uv_index'],
-                        'visibility' => $current['visibility'],
+                        'windBearing' => $current->wind_degree,
+                        'cloudCover' => $current->cloudcover,
+                        'uvIndex' => $current->uv_index,
+                        'visibility' => $current->visibility,
                         'ozone' => 0,                                       // Not available
                     ],
                     'offset' => $response->location->utc_offset,

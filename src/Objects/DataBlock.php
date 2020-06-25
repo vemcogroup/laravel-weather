@@ -4,20 +4,24 @@ namespace Vemcogroup\Weather\Objects;
 
 class DataBlock
 {
-    private $summary;
-    private $icon;
     private $data;
+    private $icon;
+    private $summary;
 
     public function __construct($data)
     {
-        if (isset($data['summary'])) {
-            $this->summary = $data['summary'];
+        if (is_array($data)) {
+            $data = (object) $data;
         }
-        if (isset($data['icon'])) {
-            $this->icon = $data['icon'];
+
+        if (isset($data->summary)) {
+            $this->summary = $data->summary;
         }
-        if (isset($data['data'])) {
-            foreach ($data['data'] as $dataPoint) {
+        if (isset($data->icon)) {
+            $this->icon = $data->icon;
+        }
+        if (isset($data->data)) {
+            foreach ($data->data as $dataPoint) {
                 $this->data[] = new DataPoint($dataPoint);
             }
         }

@@ -18,11 +18,11 @@ class Temperature
         $this->current = $current;
         $this->min = $min;
         if (!is_null($minTime)) {
-            $this->minTime = new Carbon($minTime);
+            $this->minTime = Carbon::parse($minTime);
         }
         $this->max = $max;
         if (!is_null($maxTime)) {
-            $this->maxTime = new Carbon($maxTime);
+            $this->maxTime = Carbon::parse($maxTime);
         }
     }
 

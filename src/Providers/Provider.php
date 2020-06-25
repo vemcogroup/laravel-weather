@@ -53,8 +53,6 @@ abstract class Provider
                     Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, now()->addDay());
                     $request->setResponse($content);
                 });
-
-                $urls[$request->getKey()] = new GuzzleRequest('GET', $request->getUrl());
             }
         })();
 

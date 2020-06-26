@@ -28,7 +28,7 @@ class WeatherException extends Exception
 
     public static function communicationError($message): self
     {
-        return new static('Error in communication with POEditor: ' . $message);
+        return new static('Error in communication with provider: ' . $message);
     }
 
     public static function invalidAddress($address, $message): self

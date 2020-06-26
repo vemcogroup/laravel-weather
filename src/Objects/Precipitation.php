@@ -17,9 +17,7 @@ class Precipitation
     {
         $this->intensity = $intensity;
         $this->maxIntensity = $maxIntensity;
-        if (!is_null($maxIntensityTime)) {
-            $this->maxIntensityTime = Carbon::parse($maxIntensityTime);
-        }
+        $this->maxIntensityTime = $maxIntensityTime ? Carbon::parse($maxIntensityTime) : null;
         $this->probability = $probability;
         $this->type = $type;
         $this->accumulation = $accumulation;

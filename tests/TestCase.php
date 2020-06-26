@@ -25,8 +25,6 @@ abstract class TestCase extends OrchestraTestCase
     {
         parent::setUp();
 
-        $this->withoutExceptionHandling();
-
         $this->baseStubPath = __DIR__ . '/stub/';
     }
 

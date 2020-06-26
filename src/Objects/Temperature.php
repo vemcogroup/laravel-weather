@@ -2,28 +2,23 @@
 
 namespace Vemcogroup\Weather\Objects;
 
-use DateTime;
 use Carbon\Carbon;
 
 class Temperature
 {
-    private $current;
     private $min;
-    private $minTime;
     private $max;
+    private $current;
+    private $minTime;
     private $maxTime;
 
     public function __construct($current, $min, $minTime, $max, $maxTime)
     {
         $this->current = $current;
         $this->min = $min;
-        if (!is_null($minTime)) {
-            $this->minTime = Carbon::parse($minTime);
-        }
+        $this->minTime = $minTime ? Carbon::parse($minTime) : null;
         $this->max = $max;
-        if (!is_null($maxTime)) {
-            $this->maxTime = Carbon::parse($maxTime);
-        }
+        $this->maxTime = $maxTime ? Carbon::parse($maxTime) : null;
     }
 
     public function getCurrent(): float

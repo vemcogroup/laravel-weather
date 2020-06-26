@@ -2,19 +2,45 @@
 
 namespace Vemcogroup\Weather\Tests;
 
-abstract class WeatherTest extends TestCase
+use Vemcogroup\Weather\Request;
+use Vemcogroup\Weather\Exceptions\WeatherException;
+
+class WeatherTest extends TestCase
 {
 
-    abstract public function itShouldReturnCorrectWeatherData(): void;
-    abstract public function itShouldReturnCorrectForecastData(): void;
-
-    protected function checkWeatherResponse($response): void
+    /**
+     * @test
+     */
+    public function it_tests_no_api_key_exception(): void
     {
-        $this->assertArrayHasKey('2020-01-01 13:59', $response);
-        $this->assertArrayHasKey('2020-01-02 13:59', $response);
+        config()->set('weather.api_key', null);
 
-        //$file['2020-01-01 13:59'] = json_decode($this->getFile('response.json'));
-        //$file['2020-01-02 13:59'] = json_decode($this->getFile('response.json'));
-        //$this->assertEquals($file, $response);
+        $this->expectExceptionMessage(WeatherException::noApiKey()->getMessage());
+
+        weather()->getForecast(new Request('test address'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_tests_no_provider_exception(): void
+    {
+        config()->set('weather.provider', null);
+
+        $this->expectExceptionMessage(WeatherException::noProvider()->getMessage());
+
+        weather()->getForecast(new Request('test address'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_tests_wrong_provider_exception(): void
+    {
+        config()->set('weather.provider', 'wrong_provider');
+
+        $this->expectExceptionMessage(WeatherException::wrongProvider()->getMessage());
+
+        weather()->getForecast(new Request('test address'));
     }
 }

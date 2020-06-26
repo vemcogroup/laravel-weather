@@ -6,25 +6,25 @@ use Carbon\Carbon;
 
 class DataPoint
 {
-    private $time;
-    private $summary;
     private $icon;
-    private $sunriseTime;
-    private $sunsetTime;
-    private $moonPhase;
-    private $nearestStormDistance;
-    private $nearestStormBearing;
-    private $precipitation;
-    private $temperature;
-    private $apparentTemperature;
+    private $time;
+    private $ozone;
+    private $summary;
     private $dewPoint;
-    private $windSpeed;
-    private $windBearing;
-    private $cloudCover;
     private $humidity;
     private $pressure;
+    private $moonPhase;
+    private $windSpeed;
     private $visibility;
-    private $ozone;
+    private $cloudCover;
+    private $sunsetTime;
+    private $sunriseTime;
+    private $temperature;
+    private $windBearing;
+    private $precipitation;
+    private $apparentTemperature;
+    private $nearestStormBearing;
+    private $nearestStormDistance;
 
     public function __construct($data)
     {

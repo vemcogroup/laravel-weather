@@ -19,8 +19,6 @@ class WeatherServiceProvider extends ServiceProvider
             __DIR__ . '/../config/weather.php', 'weather'
         );
 
-       /* $this->app->singleton(Translation::class, function () {
-            return new Translation();
-        });*/
+        $this->app->bind(WeatherProvider::class);
     }
 }

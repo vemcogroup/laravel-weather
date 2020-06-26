@@ -1,10 +1,12 @@
 <?php
 
-namespace Vemcogroup\Weather\Objects;
+namespace Vemcogroup\Weather;
 
 use Carbon\CarbonTimeZone;
+use Vemcogroup\Weather\Objects\DataPoint;
+use Vemcogroup\Weather\Objects\DataBlock;
 
-class Forecast
+class Response
 {
     private $daily;
     private $hourly;
@@ -85,15 +87,5 @@ class Forecast
     public function getDaily(): DataBlock
     {
         return $this->daily;
-    }
-
-    public function getCacheTTL(): ?int
-    {
-        return $this->cacheTTL;
-    }
-
-    public function getResponseTime(): ?int
-    {
-        return $this->responseTime;
     }
 }

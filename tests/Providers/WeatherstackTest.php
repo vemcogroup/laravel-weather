@@ -4,19 +4,18 @@ namespace Vemcogroup\Weather\Tests\Providers;
 
 use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
-use Vemcogroup\Weather\Tests\WeatherTest;
 use Vemcogroup\Weather\Providers\Weatherstack;
 
-class WeatherstackTest extends WeatherTest
+class WeatherstackTest extends ProviderTest
 {
 
     /**
      * @test
      */
-    public function itShouldReturnCorrectWeatherData(): void
+    public function itShouldReturnCorrectData(): void
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
-        $this->addMockHandler(200, $this->getFile('weatherstack/historical_response.json'));
+        $this->addMockHandler(200, $this->getFile('weatherstack/response.json'));
 
         $requests = [
             (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
@@ -27,28 +26,25 @@ class WeatherstackTest extends WeatherTest
                 ->withTimezone('Europe/Copenhagen'),
          ];
 
-        $response = (new Weatherstack)->getWeather($requests);
-        $this->checkWeatherResponse($response);
+        $responses = (new Weatherstack)->getData($requests);
+        $this->checkWeatherResponse($responses);
     }
 
     /**
      * @test
      */
-    public function itShouldReturnCorrectForecastData(): void
+    public function itShouldReturnCorrectDataForCurrentDay(): void
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
-        $this->addMockHandler(200, $this->getFile('weatherstack/forecast_response.json'));
+        $this->addMockHandler(200, $this->getFile('weatherstack/response.json'));
 
-        $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
+        $requests = [
+            (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
             ->withOption('units', 'si')
-            ->withOption('lang', 'en');
+            ->withOption('lang', 'en'),
+        ];
 
-        $forecast = (new Weatherstack)->getForecast($request);
-
-        $this->assertEquals('55.350', $forecast->getLatitude());
-        $this->assertEquals('10.500', $forecast->getLongitude());
-        $this->assertEquals(21, $forecast->getCurrently()->getTemperature()->getCurrent());
-        $this->assertCount(7, $forecast->getDaily()->getData());
-        $this->assertEquals('partly-cloudy-day', $forecast->getDaily()->getData()[0]->getIcon());
+        $responses = (new Weatherstack)->getData($requests);
+        $this->checkWeatherResponse($responses);
     }
 }

@@ -4,13 +4,13 @@ namespace Vemcogroup\Weather\Providers;
 
 use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
-use Vemcogroup\Weather\Objects\Forecast;
+use Vemcogroup\Weather\Response;
 
 class Darksky extends Provider
 {
     protected $url = 'https://api.darksky.net/forecast/';
 
-    public function getWeather($requests): array
+    public function getData($requests): array
     {
         $responses = [];
         $this->requests = $requests;
@@ -24,21 +24,6 @@ class Darksky extends Provider
         }
 
         return $responses;
-    }
-
-    public function getForecast(Request $request): Forecast
-    {
-        $options = $request->getHttpQuery();
-
-        $url = $this->url . $this->apiKey
-            . '/' . $request->getLatitude() . ',' . $request->getLongitude()
-            . ($options ? "?$options" : '');
-
-        $request->setUrl($url);
-        $this->requests[] = $request;
-        $this->processRequests();
-
-        return $this->requests[0]->getForecast();
     }
 
     private function buildRequest(): void

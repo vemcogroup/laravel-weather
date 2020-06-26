@@ -23,4 +23,9 @@ return [
     */
 
     'provider' => env('WEATHER_PROVIDER'),
+
+    'midday' => [
+        'hour' => '13',
+        'minute' => '59',
+    ],
 ];

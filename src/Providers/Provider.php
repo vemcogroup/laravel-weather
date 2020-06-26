@@ -6,9 +6,9 @@ namespace Vemcogroup\Weather\Providers;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Client;
 use Vemcogroup\Weather\Request;
+use Vemcogroup\Weather\Response;
 use GuzzleHttp\Promise\EachPromise;
 use Illuminate\Support\Facades\Cache;
-use Vemcogroup\Weather\Objects\Forecast;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request as GuzzleRequest;
@@ -34,8 +34,7 @@ abstract class Provider
         $this->client = app(Client::class);
     }
 
-    abstract public function getWeather($requests): array;
-    abstract public function getForecast(Request $request): Forecast;
+    abstract public function getData($requests): array;
 
     protected function processRequests(): void
     {

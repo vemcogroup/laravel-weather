@@ -2,10 +2,10 @@
 
 namespace Vemcogroup\Weather;
 
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Spatie\Geocoder\Geocoder;
 use Illuminate\Support\Facades\Cache;
-use Vemcogroup\Weather\Objects\Forecast;
 use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
@@ -24,6 +24,7 @@ class Request
     {
         try {
             $this->dates = [];
+            $this->options = [];
             $this->address = $address;
             $this->lookupGeocode();
         } catch (WeatherException $e) {
@@ -46,6 +47,11 @@ class Request
         } catch (\Exception $e) {
             throw WeatherException::invalidAddress($this->address, $e->getMessage());
         }
+    }
+
+    protected function getMidday(): Carbon
+    {
+        return now()->setHour(config('weather.midday.hour'))->setMinute(config('weather.midday.minute'));
     }
 
     public function getHttpQuery($type = 'GET'): string
@@ -75,12 +81,12 @@ class Request
 
     public function getDates(): array
     {
-        return $this->dates;
+        return count($this->dates) ? $this->dates : [$this->getMidday()];
     }
 
     public function getKey(): ?string
     {
-        return $this->key;
+        return $this->key ?: $this->getMidday()->format('Y-m-d H:i');
     }
 
     public function withOption(string $name, $value = null): Request
@@ -129,9 +135,9 @@ class Request
         return $this->response;
     }
 
-    public function getForecast(): Forecast
+    public function getForecast(): Response
     {
-        return new Forecast((object) $this->response);
+        return new Response((object) $this->response);
     }
 
     public function setUrl(string $url): Request

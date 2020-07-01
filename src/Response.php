@@ -69,22 +69,22 @@ class Response
         return $this->offset;
     }
 
-    public function getCurrently(): DataPoint
+    public function getCurrently(): ?DataPoint
     {
         return $this->currently;
     }
 
-    public function getMinutely(): DataBlock
+    public function getMinutely(): ?DataBlock
     {
         return $this->minutely;
     }
 
-    public function getHourly(): DataBlock
+    public function getHourly(): ?DataBlock
     {
         return $this->hourly;
     }
 
-    public function getDaily(): DataBlock
+    public function getDaily(): ?DataBlock
     {
         return $this->daily;
     }

@@ -106,42 +106,42 @@ class DataPoint
         }
     }
 
-    public function getTime(): Carbon
+    public function getTime(): ?Carbon
     {
         return $this->time;
     }
 
-    public function getSummary(): string
+    public function getSummary(): ?string
     {
         return $this->summary;
     }
 
-    public function getIcon(): string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
 
-    public function getSunriseTime(): Carbon
+    public function getSunriseTime(): ?Carbon
     {
         return $this->sunriseTime;
     }
 
-    public function getSunsetTime(): Carbon
+    public function getSunsetTime(): ?Carbon
     {
         return $this->sunsetTime;
     }
 
-    public function getMoonPhase(): float
+    public function getMoonPhase(): ?float
     {
         return $this->moonPhase;
     }
 
-    public function getNearestStormDistance(): int
+    public function getNearestStormDistance(): ?int
     {
         return $this->nearestStormDistance;
     }
 
-    public function getNearestStormBearing(): int
+    public function getNearestStormBearing(): ?int
     {
         return $this->nearestStormBearing;
     }
@@ -161,42 +161,42 @@ class DataPoint
         return $this->apparentTemperature;
     }
 
-    public function getDewPoint(): float
+    public function getDewPoint(): ?float
     {
         return $this->dewPoint;
     }
 
-    public function getWindSpeed(): float
+    public function getWindSpeed(): ?float
     {
         return $this->windSpeed;
     }
 
-    public function getWindBearing(): int
+    public function getWindBearing(): ?int
     {
         return $this->windBearing;
     }
 
-    public function getCloudCover(): float
+    public function getCloudCover(): ?float
     {
         return $this->cloudCover;
     }
 
-    public function getHumidity(): float
+    public function getHumidity(): ?float
     {
         return $this->humidity;
     }
 
-    public function getPressure(): float
+    public function getPressure(): ?float
     {
         return $this->pressure;
     }
 
-    public function getVisibility(): float
+    public function getVisibility(): ?float
     {
         return $this->visibility;
     }
 
-    public function getOzone(): float
+    public function getOzone(): ?float
     {
         return $this->ozone;
     }

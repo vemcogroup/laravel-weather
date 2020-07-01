@@ -1,0 +1,428 @@
+{
+    "request": {
+        "type": "City",
+        "query": "Fredericia, Denmark",
+        "language": "en",
+        "unit": "m"
+    },
+    "location": {
+        "name": "Fredericia",
+        "country": "Denmark",
+        "region": "Syddanmark",
+        "lat": "55.5779099",
+        "lon": "9.6559581",
+        "timezone_id": "Europe\/Copenhagen",
+        "localtime": "2020-07-01 13:43",
+        "localtime_epoch": 1593610980,
+        "utc_offset": "2.0"
+    },
+    "current": {
+        "observation_time": "11:43 AM",
+        "temperature": 18.83,
+        "weather_code": 116,
+        "weather_icons": [
+            "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png"
+        ],
+        "weather_descriptions": [
+            "Partly cloudy"
+        ],
+        "wind_speed": 15,
+        "wind_degree": 270,
+        "wind_dir": "W",
+        "pressure": 1003,
+        "precip": 1.6,
+        "humidity": 73,
+        "cloudcover": 75,
+        "feelslike": 18,
+        "uv_index": 4,
+        "visibility": 10,
+        "is_day": "yes"
+    },
+    "forecast": {
+        "2020-07-01": {
+            "date": "2020-07-01",
+            "date_epoch": 1593561600,
+            "astro": {
+                "sunrise": "04:43 AM",
+                "sunset": "10:06 PM",
+                "moonrise": "05:51 PM",
+                "moonset": "02:19 AM",
+                "moon_phase": "Full Moon",
+                "moon_illumination": 76
+            },
+            "mintemp": 15,
+            "maxtemp": 18,
+            "avgtemp": 16,
+            "totalsnow": 0,
+            "sunhour": 13.9,
+            "uv_index": 5,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 18,
+                    "wind_speed": 34,
+                    "wind_degree": 258,
+                    "wind_dir": "WSW",
+                    "weather_code": 353,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0009_light_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Light rain shower"
+                    ],
+                    "precip": 7.5,
+                    "humidity": 81,
+                    "visibility": 10,
+                    "pressure": 1001,
+                    "cloudcover": 68,
+                    "heatindex": 16,
+                    "dewpoint": 13,
+                    "windchill": 16,
+                    "windgust": 36,
+                    "feelslike": 16,
+                    "chanceofrain": 89,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 89,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 5
+                }
+            ]
+        },
+        "2020-07-02": {
+            "date": "2020-07-02",
+            "date_epoch": 1593648000,
+            "astro": {
+                "sunrise": "04:44 AM",
+                "sunset": "10:06 PM",
+                "moonrise": "07:18 PM",
+                "moonset": "02:40 AM",
+                "moon_phase": "Full Moon",
+                "moon_illumination": 83
+            },
+            "mintemp": 13,
+            "maxtemp": 16,
+            "avgtemp": 15,
+            "totalsnow": 0,
+            "sunhour": 15.3,
+            "uv_index": 5,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 16,
+                    "wind_speed": 23,
+                    "wind_degree": 292,
+                    "wind_dir": "WNW",
+                    "weather_code": 176,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0009_light_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Patchy rain possible"
+                    ],
+                    "precip": 0.4,
+                    "humidity": 70,
+                    "visibility": 10,
+                    "pressure": 1008,
+                    "cloudcover": 41,
+                    "heatindex": 15,
+                    "dewpoint": 9,
+                    "windchill": 14,
+                    "windgust": 28,
+                    "feelslike": 14,
+                    "chanceofrain": 72,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 84,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 5
+                }
+            ]
+        },
+        "2020-07-03": {
+            "date": "2020-07-03",
+            "date_epoch": 1593734400,
+            "astro": {
+                "sunrise": "04:45 AM",
+                "sunset": "10:05 PM",
+                "moonrise": "08:39 PM",
+                "moonset": "03:08 AM",
+                "moon_phase": "Full Moon",
+                "moon_illumination": 90
+            },
+            "mintemp": 12,
+            "maxtemp": 18,
+            "avgtemp": 15,
+            "totalsnow": 0,
+            "sunhour": 13.2,
+            "uv_index": 5,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 18,
+                    "wind_speed": 12,
+                    "wind_degree": 278,
+                    "wind_dir": "W",
+                    "weather_code": 116,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png"
+                    ],
+                    "weather_descriptions": [
+                        "Partly cloudy"
+                    ],
+                    "precip": 0,
+                    "humidity": 66,
+                    "visibility": 10,
+                    "pressure": 1013,
+                    "cloudcover": 47,
+                    "heatindex": 15,
+                    "dewpoint": 9,
+                    "windchill": 14,
+                    "windgust": 15,
+                    "feelslike": 14,
+                    "chanceofrain": 0,
+                    "chanceofremdry": 89,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 41,
+                    "chanceofsunshine": 84,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 5
+                }
+            ]
+        },
+        "2020-07-04": {
+            "date": "2020-07-04",
+            "date_epoch": 1593820800,
+            "astro": {
+                "sunrise": "04:46 AM",
+                "sunset": "10:04 PM",
+                "moonrise": "09:49 PM",
+                "moonset": "03:47 AM",
+                "moon_phase": "Full Moon",
+                "moon_illumination": 97
+            },
+            "mintemp": 7,
+            "maxtemp": 17,
+            "avgtemp": 15,
+            "totalsnow": 0,
+            "sunhour": 0,
+            "uv_index": 1,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 17,
+                    "wind_speed": 44,
+                    "wind_degree": 228,
+                    "wind_dir": "SW",
+                    "weather_code": 356,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0010_heavy_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Moderate or heavy rain shower"
+                    ],
+                    "precip": 6.5,
+                    "humidity": 87,
+                    "visibility": 9,
+                    "pressure": 1011,
+                    "cloudcover": 96,
+                    "heatindex": 15,
+                    "dewpoint": 15,
+                    "windchill": 15,
+                    "windgust": 50,
+                    "feelslike": 15,
+                    "chanceofrain": 85,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 82,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 1
+                }
+            ]
+        },
+        "2020-07-05": {
+            "date": "2020-07-05",
+            "date_epoch": 1593907200,
+            "astro": {
+                "sunrise": "04:47 AM",
+                "sunset": "10:04 PM",
+                "moonrise": "10:42 PM",
+                "moonset": "04:38 AM",
+                "moon_phase": "Waning Gibbous",
+                "moon_illumination": 97
+            },
+            "mintemp": 12,
+            "maxtemp": 19,
+            "avgtemp": 17,
+            "totalsnow": 0,
+            "sunhour": 0,
+            "uv_index": 4,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 19,
+                    "wind_speed": 44,
+                    "wind_degree": 251,
+                    "wind_dir": "WSW",
+                    "weather_code": 176,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0009_light_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Patchy rain possible"
+                    ],
+                    "precip": 5.1,
+                    "humidity": 82,
+                    "visibility": 10,
+                    "pressure": 1009,
+                    "cloudcover": 79,
+                    "heatindex": 17,
+                    "dewpoint": 14,
+                    "windchill": 17,
+                    "windgust": 44,
+                    "feelslike": 17,
+                    "chanceofrain": 87,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 85,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 4
+                }
+            ]
+        },
+        "2020-07-06": {
+            "date": "2020-07-06",
+            "date_epoch": 1593993600,
+            "astro": {
+                "sunrise": "04:48 AM",
+                "sunset": "10:03 PM",
+                "moonrise": "11:21 PM",
+                "moonset": "05:43 AM",
+                "moon_phase": "Waning Gibbous",
+                "moon_illumination": 90
+            },
+            "mintemp": 14,
+            "maxtemp": 17,
+            "avgtemp": 16,
+            "totalsnow": 0,
+            "sunhour": 0,
+            "uv_index": 4,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 17,
+                    "wind_speed": 43,
+                    "wind_degree": 263,
+                    "wind_dir": "W",
+                    "weather_code": 305,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0010_heavy_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Heavy rain at times"
+                    ],
+                    "precip": 1,
+                    "humidity": 74,
+                    "visibility": 9,
+                    "pressure": 1008,
+                    "cloudcover": 55,
+                    "heatindex": 16,
+                    "dewpoint": 11,
+                    "windchill": 16,
+                    "windgust": 51,
+                    "feelslike": 16,
+                    "chanceofrain": 89,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 91,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 4
+                }
+            ]
+        },
+        "2020-07-07": {
+            "date": "2020-07-07",
+            "date_epoch": 1594080000,
+            "astro": {
+                "sunrise": "04:49 AM",
+                "sunset": "10:02 PM",
+                "moonrise": "11:49 PM",
+                "moonset": "06:56 AM",
+                "moon_phase": "Waning Gibbous",
+                "moon_illumination": 83
+            },
+            "mintemp": 13,
+            "maxtemp": 15,
+            "avgtemp": 14,
+            "totalsnow": 0,
+            "sunhour": 0,
+            "uv_index": 3,
+            "hourly": [
+                {
+                    "time": 0,
+                    "temperature": 15,
+                    "wind_speed": 29,
+                    "wind_degree": 265,
+                    "wind_dir": "W",
+                    "weather_code": 305,
+                    "weather_icons": [
+                        "https:\/\/assets.weatherstack.com\/images\/wsymbols01_png_64\/wsymbol_0010_heavy_rain_showers.png"
+                    ],
+                    "weather_descriptions": [
+                        "Heavy rain at times"
+                    ],
+                    "precip": 1.3,
+                    "humidity": 75,
+                    "visibility": 10,
+                    "pressure": 1010,
+                    "cloudcover": 38,
+                    "heatindex": 14,
+                    "dewpoint": 10,
+                    "windchill": 13,
+                    "windgust": 30,
+                    "feelslike": 13,
+                    "chanceofrain": 70,
+                    "chanceofremdry": 0,
+                    "chanceofwindy": 0,
+                    "chanceofovercast": 86,
+                    "chanceofsunshine": 0,
+                    "chanceoffrost": 0,
+                    "chanceofhightemp": 0,
+                    "chanceoffog": 0,
+                    "chanceofsnow": 0,
+                    "chanceofthunder": 0,
+                    "uv_index": 3
+                }
+            ]
+        }
+    }
+}

@@ -31,7 +31,7 @@ class Temperature
         return $this->min;
     }
 
-    public function getMinTime(): Carbon
+    public function getMinTime(): ?Carbon
     {
         return $this->minTime;
     }
@@ -41,7 +41,7 @@ class Temperature
         return $this->max;
     }
 
-    public function getMaxTime(): Carbon
+    public function getMaxTime(): ?Carbon
     {
         return $this->maxTime;
     }

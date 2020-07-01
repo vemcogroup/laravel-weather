@@ -33,7 +33,7 @@ class Precipitation
         return $this->maxIntensity;
     }
 
-    public function getMaxIntensityTime(): Carbon
+    public function getMaxIntensityTime(): ?Carbon
     {
         return $this->maxIntensityTime;
     }

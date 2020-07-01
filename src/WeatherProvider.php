@@ -3,6 +3,7 @@
 namespace Vemcogroup\Weather;
 
 use Vemcogroup\Weather\Response;
+use Illuminate\Support\Collection;
 use Vemcogroup\Weather\Providers\Darksky;
 use Vemcogroup\Weather\Providers\Provider;
 use Vemcogroup\Weather\Providers\Weatherstack;
@@ -32,13 +33,13 @@ class WeatherProvider
         $this->provider = new self::$providers[$name]();
     }
 
-    public function getData($requests): array
+    public function getForecast($requests): Collection
     {
-        return $this->provider->getData($requests);
+        return $this->provider->getForecast($requests);
     }
 
-    public function getForecast(Request $request): Response
+    public function getHistorical($requests): Collection
     {
-        return $this->provider->getForecast($request);
+        return $this->provider->getHistorical($requests);
     }
 }

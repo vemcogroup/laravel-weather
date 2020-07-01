@@ -27,17 +27,17 @@ class DataBlock
         }
     }
 
-    public function getSummary(): string
+    public function getSummary(): ?string
     {
         return $this->summary;
     }
 
-    public function getIcon(): string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
 
-    public function getData(): array
+    public function getData(): ?array
     {
         return $this->data;
     }

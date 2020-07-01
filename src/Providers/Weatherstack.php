@@ -5,42 +5,60 @@ namespace Vemcogroup\Weather\Providers;
 use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
 use Vemcogroup\Weather\Response;
+use Illuminate\Support\Collection;
 
 class Weatherstack extends Provider
 {
     protected $url = 'http://api.weatherstack.com/';
 
-    public function getData($requests): array
+    public function getHistorical($requests): Collection
     {
-        $this->requests = $requests;
-        $this->buildRequests();
+        $this->setupRequests($requests);
+        $this->buildRequests(self::WEATHER_TYPE_HISTORICAL);
         $this->processRequests();
 
-        return $this->formatResponse();
+        return collect($this->formatResponse());
     }
 
-    private function buildRequests(): void
+    public function getForecast($requests): Collection
+    {
+        $this->setupRequests($requests);
+        $this->buildRequests(self::WEATHER_TYPE_FORECAST);
+        $this->processRequests();
+
+        return collect($this->formatResponse());
+    }
+
+    private function buildRequests($type = self::WEATHER_TYPE_FORECAST): void
     {
         /** @var Request $request */
         foreach ($this->requests as $request) {
+            $url = $this->url;
             $request->withOption('access_key', $this->apiKey)
-                ->withOption('query', $request->getLatitude() . ',' . $request->getLongitude())
-                ->withOption('hourly', 1)
-                ->withOption('interval', 1);
+                ->withOption('query', $request->getAddress());
 
-            $dates = [];
-            /** @var Carbon $date */
-            foreach ($request->getDates() as $date) {
-                $dates[] = $date->format('Y-m-d');
+            if ($type === self::WEATHER_TYPE_FORECAST) {
+                $url .= 'forecast';
+                $request->withOption('forecast_days', 7)
+                    ->withOption('hourly', 1)
+                    ->withOption('interval', 24);
             }
 
-            $request->withOption('historical_date', implode(';', $dates));
+            if ($type === self::WEATHER_TYPE_HISTORICAL) {
+                $url .= 'historical';
+                $request->withOption('hourly', 1)->withOption('interval', 1);
+                $dates = [];
+                /** @var Carbon $date */
+                foreach ($request->getDates() as $date) {
+                    $dates[] = $date->format('Y-m-d');
+                }
+
+                $request->withOption('historical_date', implode(';', $dates));
+            }
 
             $options = $request->getHttpQuery();
 
-            $url = $this->url
-                . 'historical'
-                . ($options ? "?$options" : '');
+            $url .= ($options ? "?$options" : '');
 
             $request->setUrl($url);
         }
@@ -48,7 +66,7 @@ class Weatherstack extends Provider
 
     private function formatResponse(): array
     {
-        $formattedResponses = [];
+        $result = [];
 
         /** @var Request $request */
         foreach ($this->requests as $request) {
@@ -58,69 +76,61 @@ class Weatherstack extends Provider
                 foreach ($response->historical as $dateKey => $responseData) {
                     /** @var Carbon $date */
                     foreach ($request->getDates() as $date) {
-                        $hour = $date->hour;
-                        $responseHour = $responseData->hourly;
-                        $formattedResponses[$date->format('Y-m-d H:i')] = new Response([
-                            'latitude' => (float) $response->location->lat,
-                            'longitude' => (float) $response->location->lon,
-                            'timezone' => $response->location->timezone_id,
-                            'currently' => [
-                                'time' => $date->timestamp,
-                                'summary' => $responseHour[$hour]->weather_descriptions[0][0],
-                                'icon' => $responseHour[$hour]->weather_code,
-                                'precipIntensity' => $responseHour[$hour]->precip,
-                                'precipProbability' => $responseHour[$hour]->chanceofrain,
-                                'temperature' => $responseHour[$hour]->temperature,
-                                'apparentTemperature' => $responseHour[$hour]->feelslike,
-                                'dewPoint' => $responseHour[$hour]->dewpoint,
-                                'humidity' => $responseHour[$hour]->humidity,
-                                'pressure' => $responseHour[$hour]->pressure,
-                                'windSpeed' => $responseHour[$hour]->wind_speed,
-                                'windGust' => $responseHour[$hour]->windgust,
-                                'windBearing' => $responseHour[$hour]->wind_degree,
-                                'cloudCover' => $responseHour[$hour]->cloudcover,
-                                'uvIndex' => $responseHour[$hour]->uv_index,
-                                'visibility' => $responseHour[$hour]->visibility,
-                                'ozone' => 0, // This does not exist in weatherstack?
-                            ],
-                            'offset' => $response->location->utc_offset,
-                        ]);
+                        $result[$date->format('Y-m-d H:i')] = $this->formatSingleResponse($response, $responseData->hourly[$date->hour]);
                     }
                 }
-
             } else {
-
-                $current = $response->current;
-                $time = Carbon::parse($current->observation_time);
-
-                $formattedResponses[$request->getKey()] = new Response([
-                    'latitude' => (float) $response->location->lat,
-                    'longitude' => (float) $response->location->lon,
-                    'timezone' => $response->location->timezone_id,
-                    'currently' => [
-                        'time' => $time->timestamp,
-                        'summary' => $current->weather_descriptions[0],
-                        'icon' => $current->weather_icons[0],
-                        'precipIntensity' => $current->precip,
-                        'precipProbability' => 0,                           // Not available
-                        'temperature' => $current->temperature,
-                        'apparentTemperature' => $current->feelslike,
-                        'dewPoint' => 0,                                    // Not available
-                        'humidity' => $current->humidity,
-                        'pressure' => $current->pressure,
-                        'windSpeed' => $current->wind_speed,
-                        'windGust' => 0,                                    // Not available
-                        'windBearing' => $current->wind_degree,
-                        'cloudCover' => $current->cloudcover,
-                        'uvIndex' => $current->uv_index,
-                        'visibility' => $current->visibility,
-                        'ozone' => 0,                                       // Not available
-                    ],
-                    'offset' => $response->location->utc_offset,
-                ]);
+                $result[$request->getKey()] = $this->formatSingleResponse($response, $response->current);
             }
         }
 
-        return $formattedResponses;
+        return $result;
+    }
+
+    private function formatSingleResponse($response, $data): Response
+    {
+        $data = [
+            'latitude' => (float) $response->location->lat,
+            'longitude' => (float) $response->location->lon,
+            'timezone' => $response->location->timezone_id,
+            'currently' => [
+                'time' => isset($data->observation_time) ? Carbon::parse($data->observation_time) : Carbon::parse(now()->format('Y-m-d') . ' ' . $data->time),
+                'summary' => $data->weather_descriptions[0],
+                'icon' => $data->weather_code,
+                'precipIntensity' => $data->precip,
+                'precipProbability' => 0,                           // Not available
+                'temperature' => $data->temperature,
+                'apparentTemperature' => $data->feelslike,
+                'dewPoint' => 0,                                    // Not available
+                'humidity' => $data->humidity,
+                'pressure' => $data->pressure,
+                'windSpeed' => $data->wind_speed,
+                'windGust' => 0,                                    // Not available
+                'windBearing' => $data->wind_degree,
+                'cloudCover' => $data->cloudcover,
+                'uvIndex' => $data->uv_index,
+                'visibility' => $data->visibility,
+                'ozone' => 0,                                       // Not available
+            ],
+            'offset' => $response->location->utc_offset,
+            'daily' => [
+                'icon' => $response->current->weather_code,
+                'summary' => $response->current->weather_descriptions[0] ?? null,
+            ],
+        ];
+
+        if (isset($response->forecast)) {
+            foreach ($response->forecast as $day) {
+                $data['daily']['data'][] = [
+                    'time' => $day->date_epoch ?? null,
+                    'icon' => $day->hourly[0]->weather_code ?? null,
+                    'summary' => $day->hourly[0]->weather_descriptions[0] ?? null,
+                    'temperatureMin' => $day->mintemp ?? null,
+                    'temperatureMax' => $day->maxtemp ?? null,
+                ];
+            }
+        }
+
+        return new Response($data);
     }
 }

@@ -9,8 +9,8 @@
         "name": "Fraugde",
         "country": "Denmark",
         "region": "Syddanmark",
-        "lat": "55.350",
-        "lon": "10.500",
+        "lat": "55.5779099",
+        "lon": "9.6559581",
         "timezone_id": "Europe/Copenhagen",
         "localtime": "2020-06-22 15:12",
         "localtime_epoch": 1592838720,
@@ -52,7 +52,7 @@
             "hourly": [
                 {
                     "time": "0",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -91,7 +91,7 @@
                 },
                 {
                     "time": "100",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -130,7 +130,7 @@
                 },
                 {
                     "time": "200",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -169,7 +169,7 @@
                 },
                 {
                     "time": "300",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -208,7 +208,7 @@
                 },
                 {
                     "time": "400",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -247,7 +247,7 @@
                 },
                 {
                     "time": "500",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -286,7 +286,7 @@
                 },
                 {
                     "time": "600",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -325,7 +325,7 @@
                 },
                 {
                     "time": "700",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -364,7 +364,7 @@
                 },
                 {
                     "time": "800",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -403,7 +403,7 @@
                 },
                 {
                     "time": "900",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -442,7 +442,7 @@
                 },
                 {
                     "time": "1000",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -481,7 +481,7 @@
                 },
                 {
                     "time": "1100",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -520,7 +520,7 @@
                 },
                 {
                     "time": "1200",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -559,7 +559,7 @@
                 },
                 {
                     "time": "1300",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -598,7 +598,7 @@
                 },
                 {
                     "time": "1400",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -637,7 +637,7 @@
                 },
                 {
                     "time": "1500",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -676,7 +676,7 @@
                 },
                 {
                     "time": "1600",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -715,7 +715,7 @@
                 },
                 {
                     "time": "1700",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -754,7 +754,7 @@
                 },
                 {
                     "time": "1800",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -793,7 +793,7 @@
                 },
                 {
                     "time": "1900",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -832,7 +832,7 @@
                 },
                 {
                     "time": "2000",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -871,7 +871,7 @@
                 },
                 {
                     "time": "2100",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -910,7 +910,7 @@
                 },
                 {
                     "time": "2200",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",
@@ -949,7 +949,7 @@
                 },
                 {
                     "time": "2300",
-                    "temperature": 3,
+                    "temperature": 18.83,
                     "wind_speed": 15,
                     "wind_degree": 270,
                     "wind_dir": "W",

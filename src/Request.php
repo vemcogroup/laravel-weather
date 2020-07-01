@@ -10,34 +10,31 @@ use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
 {
-    public $url;
-    public $key;
-    public $dates;
-    public $address;
-    public $timezone;
 
-    protected $geocode;
-    protected $options;
-    protected $response;
+    private $url;
+    private $key;
+    private $dates;
+    private $address;
+    private $geocode;
+    private $options;
+    private $response;
+    private $timezone;
 
     public function __construct(string $address)
     {
-        try {
-            $this->dates = [];
-            $this->options = [];
-            $this->address = $address;
-            $this->lookupGeocode();
-        } catch (WeatherException $e) {
-            throw $e;
-        }
+        $this->dates = [];
+        $this->options = [];
+        $this->address = $address;
     }
 
-    protected function lookupGeocode(): void
+    public function lookupGeocode(): void
     {
         $cacheKey = md5('laravel-weather-geocode-' . $this->address);
         try {
             if (!($this->geocode = Cache::get($cacheKey))) {
-                $response = (new Geocoder(app(Client::class)))->getCoordinatesForAddress($this->address);
+                $response = (new Geocoder(app(Client::class)))
+                    ->setApiKey(config('geocoder.key', ''))
+                    ->getCoordinatesForAddress($this->address);
                 if ($response['lat'] === 0 && $response['lng'] === 0) {
                     throw WeatherException::invalidAddress($this->address, $response['formatted_address']);
                 }
@@ -63,15 +60,19 @@ class Request
         return 'JSON_STRING';
     }
 
-    public function getCacheResponse(): ?string
+    public function getCacheResponse(): ?object
     {
         return Cache::get(md5('laravel-weather-' . $this->url));
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
     }
 
     public function getLongitude()
     {
         return $this->geocode['lng'] ?? null;
-
     }
 
     public function getLatitude()

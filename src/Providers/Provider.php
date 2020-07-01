@@ -3,20 +3,20 @@
 
 namespace Vemcogroup\Weather\Providers;
 
-use GuzzleHttp\Pool;
 use GuzzleHttp\Client;
 use Vemcogroup\Weather\Request;
-use Vemcogroup\Weather\Response;
+use Illuminate\Support\Collection;
 use GuzzleHttp\Promise\EachPromise;
 use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Promise\FulfilledPromise;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Vemcogroup\Weather\Exceptions\WeatherException;
 
 abstract class Provider
 {
+    protected const WEATHER_TYPE_FORECAST = 'forecast';
+    protected const WEATHER_TYPE_HISTORICAL = 'historical';
+
     protected $url;
     protected $apiKey;
     protected $client;
@@ -34,7 +34,13 @@ abstract class Provider
         $this->client = app(Client::class);
     }
 
-    abstract public function getData($requests): array;
+    abstract public function getForecast($requests): Collection;
+    abstract public function getHistorical($requests): Collection;
+
+    protected function setupRequests($requests): void
+    {
+        $this->requests = is_array($requests) ? $requests : [$requests];
+    }
 
     protected function processRequests(): void
     {

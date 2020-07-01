@@ -1,6 +1,6 @@
 {
-    "latitude": 55.35,
-    "longitude": 10.5,
+    "latitude": 55.5779099,
+    "longitude": 9.6559581,
     "timezone": "Europe/Copenhagen",
     "currently": {
         "time": 1577887140,
@@ -8,7 +8,7 @@
         "icon": "partly-cloudy-day",
         "precipIntensity": 0,
         "precipProbability": 0,
-        "temperature": 3,
+        "temperature": 18.83,
         "apparentTemperature": -1,
         "dewPoint": 2,
         "humidity": 90,

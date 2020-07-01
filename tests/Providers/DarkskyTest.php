@@ -12,41 +12,36 @@ class DarkskyTest extends ProviderTest
     /**
      * @test
      */
-    public function itShouldReturnCorrectData(): void
+    public function itShouldReturnCorrectHistoricalData(): void
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
-        $this->addMockHandler(200, $this->getFile('darksky/response_1.json'));
-        $this->addMockHandler(200, $this->getFile('darksky/response_2.json'));
+        $this->addMockHandler(200, $this->getFile('darksky/historical_1.json'));
+        $this->addMockHandler(200, $this->getFile('darksky/historical_2.json'));
 
-        $requests = [
-            (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
+        $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
                 ->atDates([Carbon::parse('2020-01-01 13:59'), Carbon::parse('2020-01-02 13:59')])
                 ->withOption('units', 'si')
                 ->withOption('lang', 'en')
                 ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
-                ->withTimezone('Europe/Copenhagen'),
-        ];
+                ->withTimezone('Europe/Copenhagen');
 
-        $responses = (new Darksky)->getData($requests);
+        $responses = (new Darksky)->getHistorical($request);
         $this->checkWeatherResponse($responses);
     }
 
     /**
      * @test
      */
-    public function itShouldReturnCorrectDataForCurrentDay(): void
+    public function itShouldReturnCorrectForecastData(): void
     {
         $this->addMockHandler(200, $this->getFile('geocoder.json'));
-        $this->addMockHandler(200, $this->getFile('darksky/response_1.json'));
-        $this->addMockHandler(200, $this->getFile('darksky/response_2.json'));
+        $this->addMockHandler(200, $this->getFile('darksky/forecast.json'));
 
-        $requests = [
-            (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
+        $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
             ->withOption('units', 'si')
-            ->withOption('lang', 'en'),
-        ];
+            ->withOption('lang', 'en');
 
-        $responses = (new Darksky)->getData($requests);
+        $responses = (new Darksky)->getForecast($request);
         $this->checkWeatherResponse($responses);
     }
 }

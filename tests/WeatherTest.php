@@ -16,8 +16,9 @@ class WeatherTest extends TestCase
         config()->set('weather.api_key', null);
 
         $this->expectExceptionMessage(WeatherException::noApiKey()->getMessage());
+        $this->expectExceptionCode(WeatherException::noApiKey()->getCode());
 
-        weather()->getForecast(new Request('test address'));
+        weather()->getData(new Request('test address'));
     }
 
     /**
@@ -28,8 +29,9 @@ class WeatherTest extends TestCase
         config()->set('weather.provider', null);
 
         $this->expectExceptionMessage(WeatherException::noProvider()->getMessage());
+        $this->expectExceptionCode(WeatherException::noProvider()->getCode());
 
-        weather()->getForecast(new Request('test address'));
+        weather()->getData(new Request('test address'));
     }
 
     /**
@@ -40,7 +42,8 @@ class WeatherTest extends TestCase
         config()->set('weather.provider', 'wrong_provider');
 
         $this->expectExceptionMessage(WeatherException::wrongProvider()->getMessage());
+        $this->expectExceptionCode(WeatherException::wrongProvider()->getCode());
 
-        weather()->getForecast(new Request('test address'));
+        weather()->getData(new Request('test address'));
     }
 }

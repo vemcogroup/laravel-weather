@@ -160,7 +160,7 @@ To get historical data you can do this:
 $weather = weather()->getHistorical($request);
 ```
 
-Remember to set data on request.  
+Remember to set dates on request.  
 Response will be a collection with keys representing the dates for historical data.
 
 ### Response

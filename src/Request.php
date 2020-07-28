@@ -13,18 +13,22 @@ class Request
 
     private $url;
     private $key;
+    private $units;
     private $dates;
+    private $locale;
     private $address;
     private $geocode;
     private $options;
     private $response;
-    private $timezone;
 
     public function __construct(string $address)
     {
         $this->dates = [];
         $this->options = [];
         $this->address = $address;
+
+        $this->units = 's';
+        $this->locale = 'en';
     }
 
     public function lookupGeocode(): void
@@ -97,11 +101,28 @@ class Request
         return $this;
     }
 
-    public function withTimezone(string $timezone): Request
+    public function withUnits(string $units): Request
     {
-        $this->timezone = $timezone;
+        $this->units = $units;
 
         return $this;
+    }
+
+    public function getUnits(): string
+    {
+        return $this->units;
+    }
+
+    public function withLocale(string $locale = null): Request
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
     }
 
     public function atDates(array $dates): Request

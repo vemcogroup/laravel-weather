@@ -2,7 +2,6 @@
 
 namespace Vemcogroup\Weather\Providers;
 
-use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
 use Illuminate\Support\Collection;
 
@@ -44,13 +43,25 @@ class Darksky extends Provider
             $request->lookupGeocode();
             $latitude = $request->getLatitude();
             $longitude = $request->getLongitude();
+
+            // convert units
+            if ($request->getUnits() === self::WEATHER_UNITS_METRIC) {
+                $request->withUnits('si');
+            }
+
+            if ($request->getUnits() === self::WEATHER_UNITS_FAHRENHEIT) {
+                $request->withUnits('us');
+            }
+
             $options = $request->getHttpQuery();
 
             if ($type === self::WEATHER_TYPE_FORECAST) {
                 $dateRequest = clone $request;
                 $url = $this->url . $this->apiKey
                     . "/$latitude,$longitude"
-                    . ($options ? "?$options" : '');
+                    . "?lang=" . $request->getLocale()
+                    . "&units=" . $request->getUnits()
+                    . ($options ? "&$options" : '');
                 $dateRequest->setUrl($url);
                 $requests[] = $dateRequest;
             }
@@ -61,20 +72,14 @@ class Darksky extends Provider
                     $url = $this->url . $this->apiKey
                         . "/$latitude,$longitude"
                         . ",$date->timestamp"
-                        . ($options ? "?$options" : '');
+                        . "?lang=" . $request->getLocale()
+                        . "&units=" . $request->getUnits()
+                        . ($options ? "&$options" : '');
                     $dateRequest->setKey($date->format('Y-m-d H:i'));
                     $dateRequest->setUrl($url);
                     $requests[] = $dateRequest;
                 }
             }
-
-           /* if (!empty($request['time'])) {
-                $currentTimezone = config('app.timezone');
-                //$currentTimezone = user() && user()->user_timezone ? user()->user_timezone : config('app.timezone');
-                $dateConverted = new \DateTime($request['time'], new \DateTimeZone($request['timezone']));
-                $dateConverted->setTimezone(new \DateTimeZone($currentTimezone));
-                $time = $dateConverted->getTimestamp();
-            }*/
         }
 
         if(count($requests)) {

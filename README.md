@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vemcogroup/laravel-weather.svg?style=flat-square)](https://packagist.org/packages/vemcogroup/laravel-weather)
 [![Total Downloads](https://img.shields.io/packagist/dt/vemcogroup/laravel-weather.svg?style=flat-square)](https://packagist.org/packages/vemcogroup/laravel-weather)
+[![tests](https://github.com/vemcogroup/laravel-weather/workflows/tests/badge.svg)](https://github.com/vemcogroup/laravel-weather/workflows/tests/badge.svg)
 
 ## Description
 

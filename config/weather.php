@@ -33,7 +33,7 @@ return [
     |
     */
     'midday' => [
-        'hour' => '11',
+        'hour' => '13',
         'minute' => '59',
     ],
 ];

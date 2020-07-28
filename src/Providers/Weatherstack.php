@@ -82,8 +82,10 @@ class Weatherstack extends Provider
                 /** @var Carbon $date */
                 foreach ($request->getDates() as $date) {
                     $key = $date->format('Y-m-d');
-                    $responseData = $response->historical->$key;
-                    $result[$date->format('Y-m-d H:i')] = $this->formatSingleResponse($response, $responseData->hourly[$date->hour]);
+                    if (property_exists($response->historical, $key)) {
+                        $responseData = $response->historical->$key;
+                        $result[$date->format('Y-m-d H:i')] = $this->formatSingleResponse($response, $responseData->hourly[$date->hour]);
+                    }
                 }
             } else {
                 $result[$request->getKey()] = $this->formatSingleResponse($response, $response->current);

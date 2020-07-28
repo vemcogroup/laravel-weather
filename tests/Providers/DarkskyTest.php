@@ -20,10 +20,8 @@ class DarkskyTest extends ProviderTest
 
         $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
                 ->atDates([Carbon::parse('2020-01-01 13:59'), Carbon::parse('2020-01-02 13:59')])
-                ->withOption('units', 'si')
-                ->withOption('lang', 'en')
-                ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
-                ->withTimezone('Europe/Copenhagen');
+                ->withUnits( 'm')
+                ->withLocale('en');
 
         $responses = (new Darksky)->getHistorical($request);
         $this->checkWeatherResponse($responses);
@@ -38,8 +36,8 @@ class DarkskyTest extends ProviderTest
         $this->addMockHandler(200, $this->getFile('darksky/forecast.json'));
 
         $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
-            ->withOption('units', 'si')
-            ->withOption('lang', 'en');
+            ->withUnits( 'm')
+            ->withLocale('en');
 
         $responses = (new Darksky)->getForecast($request);
         $this->checkWeatherResponse($responses);

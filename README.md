@@ -73,9 +73,9 @@ return [
 At the moment this package support the folllowing weather services:
 
 | Service | Website | Geocoding | Remarks |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | :---: | :--- |
 | Dark Sky | https://darksky.net | Manual | Deprecated, not able to aquire api key https://blog.darksky.net |
-| Weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. \ For forecast data a minimum Professional license is required.  |
+| Weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required.  |
 
 For other weather services fill free to create an issue or make a Pull Request.
 

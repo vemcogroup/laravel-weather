@@ -36,6 +36,10 @@ class Weatherstack extends Provider
             $url = $this->url;
             $request->withOption('access_key', $this->apiKey)
                 ->withOption('query', $request->getAddress());
+            
+            if($request->getLocale() === 'en') {
+                $request->withLocale(null);
+            }
 
             if ($type === self::WEATHER_TYPE_FORECAST) {
                 $url .= 'forecast';
@@ -58,7 +62,9 @@ class Weatherstack extends Provider
 
             $options = $request->getHttpQuery();
 
-            $url .= ($options ? "?$options" : '');
+            $url .= "?units=" . $request->getUnits()
+            . ($request->getLocale() ? "&language=" . $request->getLocale() : '')
+            . ($options ? "&$options" : '');
 
             $request->setUrl($url);
         }
@@ -73,9 +79,11 @@ class Weatherstack extends Provider
             $response = $request->getResponse();
 
             if (isset($response->historical)) {
-                foreach ($response->historical as $dateKey => $responseData) {
-                    /** @var Carbon $date */
-                    foreach ($request->getDates() as $date) {
+                /** @var Carbon $date */
+                foreach ($request->getDates() as $date) {
+                    $key = $date->format('Y-m-d');
+                    if (property_exists($response->historical, $key)) {
+                        $responseData = $response->historical->$key;
                         $result[$date->format('Y-m-d H:i')] = $this->formatSingleResponse($response, $responseData->hourly[$date->hour]);
                     }
                 }
@@ -94,9 +102,9 @@ class Weatherstack extends Provider
             'longitude' => (float) $response->location->lon,
             'timezone' => $response->location->timezone_id,
             'currently' => [
-                'time' => isset($data->observation_time) ? Carbon::parse($data->observation_time) : Carbon::parse(now()->format('Y-m-d') . ' ' . $data->time),
+                'time' => isset($data->observation_time) ? Carbon::parse(strtotime($data->observation_time)) : Carbon::parse(strtotime(now()->format('Y-m-d') . ' ' . $data->time)),
                 'summary' => $data->weather_descriptions[0],
-                'icon' => $data->weather_code,
+                'icon' => $this->convertIcon($data->weather_code),
                 'precipIntensity' => $data->precip,
                 'precipProbability' => 0,                           // Not available
                 'temperature' => $data->temperature,
@@ -114,7 +122,7 @@ class Weatherstack extends Provider
             ],
             'offset' => $response->location->utc_offset,
             'daily' => [
-                'icon' => $response->current->weather_code,
+                'icon' => $this->convertIcon($response->current->weather_code),
                 'summary' => $response->current->weather_descriptions[0] ?? null,
             ],
         ];
@@ -123,7 +131,7 @@ class Weatherstack extends Provider
             foreach ($response->forecast as $day) {
                 $data['daily']['data'][] = [
                     'time' => $day->date_epoch ?? null,
-                    'icon' => $day->hourly[0]->weather_code ?? null,
+                    'icon' => $this->convertIcon($day->hourly[0]->weather_code) ?? self::WEATHER_ICON_NA,
                     'summary' => $day->hourly[0]->weather_descriptions[0] ?? null,
                     'temperatureMin' => $day->mintemp ?? null,
                     'temperatureMax' => $day->maxtemp ?? null,
@@ -132,5 +140,62 @@ class Weatherstack extends Provider
         }
 
         return new Response($data);
+    }
+
+    private function convertIcon($code)
+    {
+        $map = [
+            113 => self::WEATHER_ICON_CLEAR_DAY,
+            116 => self::WEATHER_ICON_PARTLY_CLOUDY_DAY,
+            119 => self::WEATHER_ICON_CLOUDY,
+            122 => self::WEATHER_ICON_CLOUDY,
+            143 => self::WEATHER_ICON_CLOUDY,
+            176 => self::WEATHER_ICON_RAIN,
+            179 => self::WEATHER_ICON_SLEET,
+            182 => self::WEATHER_ICON_SLEET,
+            185 => self::WEATHER_ICON_SLEET,
+            200 => self::WEATHER_ICON_RAIN,
+            227 => self::WEATHER_ICON_SNOW,
+            230 => self::WEATHER_ICON_SNOW,
+            248 => self::WEATHER_ICON_FOG,
+            260 => self::WEATHER_ICON_FOG,
+            263 => self::WEATHER_ICON_RAIN,
+            266 => self::WEATHER_ICON_RAIN,
+            281 => self::WEATHER_ICON_SLEET,
+            284 => self::WEATHER_ICON_SLEET,
+            293 => self::WEATHER_ICON_RAIN,
+            296 => self::WEATHER_ICON_RAIN,
+            299 => self::WEATHER_ICON_RAIN,
+            302 => self::WEATHER_ICON_RAIN,
+            305 => self::WEATHER_ICON_RAIN,
+            308 => self::WEATHER_ICON_RAIN,
+            311 => self::WEATHER_ICON_SLEET,
+            314 => self::WEATHER_ICON_SLEET,
+            317 => self::WEATHER_ICON_SLEET,
+            320 => self::WEATHER_ICON_SLEET,
+            323 => self::WEATHER_ICON_SNOW,
+            326 => self::WEATHER_ICON_SNOW,
+            329 => self::WEATHER_ICON_SNOW,
+            332 => self::WEATHER_ICON_SNOW,
+            335 => self::WEATHER_ICON_SNOW,
+            338 => self::WEATHER_ICON_SNOW,
+            350 => self::WEATHER_ICON_SLEET,
+            353 => self::WEATHER_ICON_RAIN,
+            356 => self::WEATHER_ICON_RAIN,
+            359 => self::WEATHER_ICON_RAIN,
+            362 => self::WEATHER_ICON_SLEET,
+            365 => self::WEATHER_ICON_SLEET,
+            368 => self::WEATHER_ICON_SNOW,
+            371 => self::WEATHER_ICON_SNOW,
+            374 => self::WEATHER_ICON_SLEET,
+            377 => self::WEATHER_ICON_SLEET,
+            386 => self::WEATHER_ICON_RAIN,
+            389 => self::WEATHER_ICON_RAIN,
+            392 => self::WEATHER_ICON_SNOW,
+            395 => self::WEATHER_ICON_SNOW,
+        ];
+
+        return $map[$code] ?: self::WEATHER_ICON_NA;
+
     }
 }

@@ -14,6 +14,21 @@ use Vemcogroup\Weather\Exceptions\WeatherException;
 
 abstract class Provider
 {
+    public const WEATHER_UNITS_METRIC = 'm';
+    public const WEATHER_UNITS_FAHRENHEIT = 'f';
+
+    public const WEATHER_ICON_NA = 'na';
+    public const WEATHER_ICON_CLEAR_DAY = 'clear-day';
+    public const WEATHER_ICON_CLEAR_NIGHT = 'clear-night';
+    public const WEATHER_ICON_RAIN = 'rain';
+    public const WEATHER_ICON_SNOW = 'snow';
+    public const WEATHER_ICON_SLEET = 'sleet';
+    public const WEATHER_ICON_WIND = 'wind';
+    public const WEATHER_ICON_FOG = 'fog';
+    public const WEATHER_ICON_CLOUDY = 'cloudy';
+    public const WEATHER_ICON_PARTLY_CLOUDY_DAY = 'partly-cloudy-day';
+    public const WEATHER_ICON_PARTLY_CLOUDY_NIGHT = 'partly-cloudy-night';
+
     protected const WEATHER_TYPE_FORECAST = 'forecast';
     protected const WEATHER_TYPE_HISTORICAL = 'historical';
 

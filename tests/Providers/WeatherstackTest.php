@@ -18,10 +18,8 @@ class WeatherstackTest extends ProviderTest
 
         $request = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
                 ->atDates([Carbon::parse('2020-01-01 13:59'), Carbon::parse('2020-01-02 13:59')])
-                ->withOption('units', 'si')
-                ->withOption('lang', 'en')
-                ->withOption('exclude', 'minutely,hourly,alerts,flags,daily')
-                ->withTimezone('Europe/Copenhagen');
+                ->withUnits( 'm')
+                ->withLocale('en');
 
         $responses = (new Weatherstack)->getHistorical($request);
         $this->checkWeatherResponse($responses);
@@ -35,8 +33,8 @@ class WeatherstackTest extends ProviderTest
         $this->addMockHandler(200, $this->getFile('weatherstack/forecast.json'));
 
         $requests = (new Request('1 Infinite Loop, Cupertino, CA 95014, USA'))
-            ->withOption('units', 'si')
-            ->withOption('lang', 'en');
+            ->withUnits( 'm')
+            ->withLocale('en');
 
         $responses = (new Weatherstack)->getForecast($requests);
         $this->checkWeatherResponse($responses);

@@ -71,17 +71,17 @@ return [
 
 ## Usage
 
-At the moment this package support the folllowing weather services:
+At the moment this package support the following weather services:
 
 | Service | Website | Geocoding | Remarks |
 | :--- | :--- | :---: | :--- |
-| Dark Sky | https://darksky.net | Manual | Deprecated, not able to aquire api key https://blog.darksky.net |
+| Dark Sky | https://darksky.net | Manual | Deprecated, not able to acquire api key https://blog.darksky.net |
 | Weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required.  |
 
 For other weather services fill free to create an issue or make a Pull Request.
 
 For `Manual` geocoding you need a Google geocode api key.  
-Aquire it here https://developers.google.com/maps/documentation/geocoding/start and insert it into your .env file
+Acquire it here https://developers.google.com/maps/documentation/geocoding/start and insert it into your .env file.
 
 ```php
 GOOGLE_MAPS_GEOCODING_API_KEY= 
@@ -114,7 +114,7 @@ $request->withLocale('nl');
 ```
 Locale need to be an 2-letter ISO Code of your preferred language.
 
-*Dates*
+*Dates* 
 If you need to select the dates to get weather data for E.g for historical data, set the dates like this:
 
 ```php

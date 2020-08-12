@@ -71,12 +71,12 @@ return [
 
 ## Usage
 
-At the moment this package support the following weather services:
+At the moment this package support the following weather services, you can update `WEATHER_PROVIDER` to one of the following
 
-| Service | Website | Geocoding | Remarks |
-| :--- | :--- | :---: | :--- |
-| Dark Sky | https://darksky.net | Manual | Deprecated, not able to acquire api key https://blog.darksky.net |
-| Weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required.  |
+| Service | Provider name | Website | Geocoding | Remarks |
+| :--- | :--- | :--- | :---: | :--- |
+| Dark Sky | darksy | https://darksky.net | Manual | Deprecated, not able to acquire api key https://blog.darksky.net |
+| Weatherstack | weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required.  |
 
 For other weather services fill free to create an issue or make a Pull Request.
 

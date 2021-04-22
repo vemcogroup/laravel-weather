@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 class DataPoint
 {
+    private $data;
     private $icon;
     private $time;
     private $ozone;
@@ -31,6 +32,8 @@ class DataPoint
         if (is_array($data)) {
             $data = (object) $data;
         }
+
+        $this->data = $data;
 
         if (isset($data->time)) {
             $this->time = Carbon::parse($data->time);
@@ -199,5 +202,10 @@ class DataPoint
     public function getOzone(): ?float
     {
         return $this->ozone;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 }

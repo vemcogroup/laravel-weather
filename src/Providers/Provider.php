@@ -70,7 +70,7 @@ abstract class Provider
 
                 yield $this->client->getAsync($request->getUrl())->then(function (GuzzleResponse $response) use ($request) {
                     $content = json_decode($response->getBody());
-                    Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, now()->addDay());
+                    Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, $request->getCacheTimeout());
                     $request->setResponse($content);
                 });
             }

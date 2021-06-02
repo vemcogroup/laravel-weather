@@ -20,12 +20,14 @@ class Request
     private $geocode;
     private $options;
     private $response;
+    private $cacheTimeout;
 
-    public function __construct(string $address)
+    public function __construct(string $address, $cacheTimeout = 86400)
     {
         $this->dates = [];
         $this->options = [];
         $this->address = $address;
+        $this->cacheTimeout = $cacheTimeout;
 
         $this->units = 's';
         $this->locale = 'en';
@@ -67,6 +69,11 @@ class Request
     public function getCacheResponse(): ?object
     {
         return Cache::get(md5('laravel-weather-' . $this->url));
+    }
+
+    public function getCacheTimeout()
+    {
+        return $this->cacheTimeout;
     }
 
     public function getAddress(): string

@@ -109,6 +109,13 @@ Start by setting up your request
 $request = (new Vemcogroup\Weather\Request('1 Infinite Loop, Cupertino, CA 95014, USA'));
 ```
 
+By default, it caches the weather response for 24hrs (86.400sec), this can be changed by setting a second parameter to cache timeout (in seconds)
+
+```php
+$request = (new Vemcogroup\Weather\Request('1 Infinite Loop, Cupertino, CA 95014, USA', 600));
+```
+
+
 *Units*  
 There two available unit types, default is Metric:
 

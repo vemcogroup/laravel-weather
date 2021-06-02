@@ -45,12 +45,12 @@ class Weatherstack extends Provider
                 $url .= 'forecast';
                 $request->withOption('forecast_days', 7)
                     ->withOption('hourly', 1)
-                    ->withOption('interval', 24);
+                    ->withOption('interval', config('weather.intervals.forecast', 24));
             }
 
             if ($type === self::WEATHER_TYPE_HISTORICAL) {
                 $url .= 'historical';
-                $request->withOption('hourly', 1)->withOption('interval', 1);
+                $request->withOption('hourly', 1)->withOption('interval', config('weather.intervals.historical', 1));
                 $dates = [];
                 /** @var Carbon $date */
                 foreach ($request->getDates() as $date) {

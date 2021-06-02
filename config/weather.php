@@ -36,4 +36,18 @@ return [
         'hour' => '13',
         'minute' => '59',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Intervals
+    |--------------------------------------------------------------------------
+    |
+    | Here you define the intervals for forecast and historical data.
+    | Only available for Weatherstack:
+    |
+    */
+    'intervals' => [
+        'forecast' => env('WEATHER_FORECAST_INTERVAL', 24),
+        'historical' => env('WEATHER_HISTORICAL_INTERVAL', 1),
+    ],
 ];

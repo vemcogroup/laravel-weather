@@ -50,4 +50,15 @@ return [
         'forecast' => env('WEATHER_FORECAST_INTERVAL', 24),
         'historical' => env('WEATHER_HISTORICAL_INTERVAL', 1),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Historical Date status
+    |--------------------------------------------------------------------------
+    |
+    | Here you define the Historical Date will add or not.
+    |
+    |
+    */
+    'historical_date_status' => env('WEATHER_HISTORICAL_DATE_STATUS', true),
 ];

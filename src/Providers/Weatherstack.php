@@ -53,11 +53,13 @@ class Weatherstack extends Provider
                 $request->withOption('hourly', 1)->withOption('interval', config('weather.intervals.historical', 1));
                 $dates = [];
                 /** @var Carbon $date */
-                foreach ($request->getDates() as $date) {
-                    $dates[] = $date->format('Y-m-d');
-                }
+                if (config('weather.historical_date_status')) {
+                    foreach ($request->getDates() as $date) {
+                        $dates[] = $date->format('Y-m-d');
+                    }
 
-                $request->withOption('historical_date', implode(';', $dates));
+                    $request->withOption('historical_date', implode(';', $dates));
+                }
             }
 
             $options = $request->getHttpQuery();

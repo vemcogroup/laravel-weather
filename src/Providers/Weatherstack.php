@@ -78,6 +78,9 @@ class Weatherstack extends Provider
 
         /** @var Request $request */
         foreach ($this->requests as $request) {
+            if (!config('weather.formated_response.historical')) {
+                return $request->getResponse('array');
+            }
             $response = $request->getResponse();
 
             if (isset($response->historical)) {

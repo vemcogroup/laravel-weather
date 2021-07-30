@@ -61,4 +61,17 @@ return [
     |
     */
     'historical_date_status' => env('WEATHER_HISTORICAL_DATE_STATUS', true),
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Formated Response
+    |--------------------------------------------------------------------------
+    |
+    | Here you can define returned response is formatted or default.
+    |
+    |
+    */
+    'formated_response' => [
+        'historical' => env('WEATHER_HISTORICAL_FORMATED_RESPONSE', true),
+    ],
 ];

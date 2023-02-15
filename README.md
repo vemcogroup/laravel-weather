@@ -25,72 +25,18 @@ To publish the config file to `config/weather.php` run:
 php artisan vendor:publish --provider="Vemcogroup\Weather\WeatherServiceProvider"
 ```
 
-This is the default contents of the configuration:
+The default configuration can be seen [here](https://github.com/vemcogroup/laravel-weather/blob/master/config/weather.php)
 
-```php
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | API Key
-    |--------------------------------------------------------------------------
-    |
-    | Here you define your API Key for weather provider.
-    |
-    */
-
-    'api_key' => env('WEATHER_API_KEY'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Weather provider
-    |--------------------------------------------------------------------------
-    |
-    | Here you define provider you want to get weather information from.
-    |
-    */
-
-    'provider' => env('WEATHER_PROVIDER'),
-    
-    /*
-    |--------------------------------------------------------------------------
-    | Midday
-    |--------------------------------------------------------------------------
-    |
-    | Here you define what time is midday.
-    |
-    */
-
-    'midday' => [
-        'hour' => '13',
-        'minute' => '59',
-    ],
-    
-    /*
-    |--------------------------------------------------------------------------
-    | Intervals
-    |--------------------------------------------------------------------------
-    |
-    | Here you define the intervals for forecast and historical data.
-    | !Only available for Weatherstack
-    |
-    */
-    'intervals' => [
-        'forecast' => env('WEATHER_FORECAST_INTERVAL', 24),
-        'historical' => env('WEATHER_HISTORICAL_INTERVAL', 1),
-    ],
-
-];
-```
 
 ## Usage
 
 At the moment this package support the following weather services, you can update `WEATHER_PROVIDER` to one of the following
 
-| Service | Provider name | Website | Geocoding | Remarks |
-| :--- | :--- | :--- | :---: | :--- |
-| Dark Sky | darksy | https://darksky.net | Manual | Deprecated, not able to acquire api key https://blog.darksky.net |
-| Weatherstack | weatherstack | https://weatherstack.com | Auto | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required.  |
+| Service      | Provider name | Website                                 | Geocoding | Remarks                                                                                                                   |
+|:-------------|:--------------|:----------------------------------------|:---------:|:--------------------------------------------------------------------------------------------------------------------------|
+| Dark Sky     | darksky       | https://darksky.net                     |  Manual   | Deprecated, not able to acquire api key https://blog.darksky.net. Will continue to function until March 31st, 2023.       |
+| Weatherstack | weatherstack  | https://weatherstack.com                |   Auto    | For historical data a minimum Standard license is required. For forecast data a minimum Professional license is required. |
+| WeatherKit   | weatherkit    | https://developer.apple.com/weatherkit/ |   Auto    | Needs an apple developer account.                                                                                         |
 
 For other weather services fill free to create an issue or make a Pull Request.
 

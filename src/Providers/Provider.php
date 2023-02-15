@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Cache;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use Vemcogroup\Weather\Exceptions\WeatherException;
+use function md5;
+use function method_exists;
 
 abstract class Provider
 {
@@ -42,7 +44,7 @@ abstract class Provider
     {
         $this->requests = [];
 
-        if (!$this->apiKey = config('weather.api_key')) {
+        if (!($this->apiKey = config('weather.api_key'))) {
             throw WeatherException::noApiKey();
         }
 
@@ -70,7 +72,11 @@ abstract class Provider
 
                 yield $this->client->getAsync($request->getUrl())->then(function (GuzzleResponse $response) use ($request) {
                     $content = json_decode($response->getBody());
-                    Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, $request->getCacheTimeout());
+
+                    if (!method_exists($this, 'verifyResponse') || (method_exists($this, 'verifyResponse') && $this->verifyResponse($content))) {
+                        Cache::put(md5('laravel-weather-' . $request->getUrl()), $content, $request->getCacheTimeout());
+                    }
+
                     $request->setResponse($content);
                 });
             }
@@ -84,5 +90,15 @@ abstract class Provider
             }
         ]);
         $eachPromise->promise()->wait();
+    }
+
+    protected function celsiusToFahrenheit(float $celsius): float
+    {
+        return ($celsius * 1.8) + 32;
+    }
+
+    protected function kmToMiles(float $km): float
+    {
+        return $km * 0.62137119;
     }
 }

@@ -21,6 +21,7 @@ class Request
     private $options;
     private $response;
     private $cacheTimeout;
+    private $timezone = null;
 
     public function __construct(string $address, $cacheTimeout = 86400)
     {
@@ -183,5 +184,17 @@ class Request
         }
 
         return $this->url;
+    }
+
+    public function getTimezone()
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone($timezone): Request
+    {
+        $this->timezone = $timezone;
+
+        return $this;
     }
 }

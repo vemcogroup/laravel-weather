@@ -6,9 +6,11 @@ use Exception;
 
 class WeatherException extends Exception
 {
+    public const NO_API_KEY_ERROR_CODE = 1001;
+
     public static function noApiKey(): self
     {
-        return new static('Missing WEATHER_API_KEY, please add it in .env', 1001);
+        return new static('Missing WEATHER_API_KEY, please add it in .env', self::NO_API_KEY_ERROR_CODE);
     }
 
     public static function noProvider(): self

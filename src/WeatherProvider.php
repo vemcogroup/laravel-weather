@@ -6,6 +6,7 @@ use Vemcogroup\Weather\Response;
 use Illuminate\Support\Collection;
 use Vemcogroup\Weather\Providers\Darksky;
 use Vemcogroup\Weather\Providers\Provider;
+use Vemcogroup\Weather\Providers\WeatherKit;
 use Vemcogroup\Weather\Providers\Weatherstack;
 use Vemcogroup\Weather\Exceptions\WeatherException;
 
@@ -15,9 +16,11 @@ class WeatherProvider
      * @var Provider $provider
      */
     private $provider;
+
     private static $providers = [
         'darksky' => Darksky::class,
         'weatherstack' => Weatherstack::class,
+        'weatherkit' => WeatherKit::class,
     ];
 
     public function __construct()

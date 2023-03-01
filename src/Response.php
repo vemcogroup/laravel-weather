@@ -59,7 +59,7 @@ class Response
         return $this->longitude;
     }
 
-    public function getTimezone(): CarbonTimeZone
+    public function getTimezone(): ?CarbonTimeZone
     {
         return $this->timezone;
     }

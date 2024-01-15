@@ -86,7 +86,7 @@ abstract class Provider
             'concurrency' => $this->threads,
             'fulfilled' => function ($profile) {},
             'rejected' => function ($reason) {
-                throw WeatherException::communicationError($reason);
+                //throw WeatherException::communicationError($reason);
             }
         ]);
         $eachPromise->promise()->wait();

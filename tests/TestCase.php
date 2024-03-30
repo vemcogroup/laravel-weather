@@ -55,7 +55,7 @@ abstract class TestCase extends OrchestraTestCase
             $this->createMockResponse();
         }
 
-        $this->mockHandler->append(new Response($code, $headers, $body, $headers));
+        $this->mockHandler->append(new Response($code, $headers, $body));
     }
 
     protected function createMockResponse(): void

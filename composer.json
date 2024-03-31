@@ -21,7 +21,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "firebase/php-jwt": "^6.4",
-        "laravel/framework": "^9.0|^10.0",
+        "laravel/framework": "^9.0|^10.0|^11.0",
         "spatie/geocoder": "^3.1",
         "ext-openssl": "*"
     },

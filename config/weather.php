@@ -39,16 +39,92 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Intervals
+    | Providers
     |--------------------------------------------------------------------------
     |
-    | Here you define the intervals for forecast and historical data.
-    | Only available for Weatherstack:
+    | Here you define the provider-specific settings
     |
     */
-    'intervals' => [
-        'forecast' => env('WEATHER_FORECAST_INTERVAL', 24),
-        'historical' => env('WEATHER_HISTORICAL_INTERVAL', 1),
+    'providers' => [
+
+        'weatherkit' => [
+
+            /*
+            |--------------------------------------------------------------------------
+            | Private key
+            |--------------------------------------------------------------------------
+            |
+            | Private key issued from your Apple Developer Account
+            |
+            */
+            'private-key' => base64_decode(env('WEATHER_KIT_PRIVATE_KEY')),
+
+            /*
+            |--------------------------------------------------------------------------
+            | Algorithm
+            |--------------------------------------------------------------------------
+            |
+            | The algorithm with which to sign the token. Weatherkit only supports ES256.
+            |
+            */
+            'alg' => env('WEATHER_KIT_ALGORITHM', 'ES256'),
+
+            /*
+            |--------------------------------------------------------------------------
+            | Key ID
+            |--------------------------------------------------------------------------
+            |
+            | Key identifier obtained from your Apple Developer Account
+            |
+            */
+            'kid' => env('WEATHER_KIT_KID'),
+
+            /*
+            |--------------------------------------------------------------------------
+            | ID
+            |--------------------------------------------------------------------------
+            |
+            | An identifier that consists of your 10-character Team ID and Service ID, separated by a period.
+            |
+            */
+            'id' => env('WEATHER_KIT_ID'),
+
+            /*
+            |--------------------------------------------------------------------------
+            | Issuer Claim Key
+            |--------------------------------------------------------------------------
+            |
+            | The issuer claim key. This value is your 10-character Team ID from your developer account.
+            |
+            */
+            'iss' => env('WEATHER_KIT_ISS'),
+
+            /*
+            |--------------------------------------------------------------------------
+            | Subject Public Claim Key
+            |--------------------------------------------------------------------------
+            |
+            | The subject public claim key. This value is your registered Service ID.
+            |
+            */
+            'sub' => env('WEATHER_KIT_SUB'),
+        ],
+
+        'weatherstack' => [
+
+            /*
+            |--------------------------------------------------------------------------
+            | Intervals
+            |--------------------------------------------------------------------------
+            |
+            | Here you define the intervals for forecast and historical data.
+            |
+            */
+            'intervals' => [
+                'forecast' => env('WEATHER_FORECAST_INTERVAL', 24),
+                'historical' => env('WEATHER_HISTORICAL_INTERVAL', 1),
+            ],
+        ]
     ],
 
     /*

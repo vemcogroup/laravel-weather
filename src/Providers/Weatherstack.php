@@ -36,7 +36,7 @@ class Weatherstack extends Provider
             $url = $this->url;
             $request->withOption('access_key', $this->apiKey)
                 ->withOption('query', $request->getAddress());
-            
+
             if($request->getLocale() === 'en') {
                 $request->withLocale(null);
             }
@@ -78,7 +78,7 @@ class Weatherstack extends Provider
 
         /** @var Request $request */
         foreach ($this->requests as $request) {
-            if (!config('weather.formated_response.historical')) {
+            if (!config('weather.formatted_response.historical')) {
                 return $request->getResponse('array');
             }
             $response = $request->getResponse();

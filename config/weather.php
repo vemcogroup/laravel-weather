@@ -137,7 +137,7 @@ return [
     |
     */
     'historical_date_status' => env('WEATHER_HISTORICAL_DATE_STATUS', true),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Formated Response
@@ -147,7 +147,7 @@ return [
     |
     |
     */
-    'formated_response' => [
-        'historical' => env('WEATHER_HISTORICAL_FORMATED_RESPONSE', true),
+    'formatted_response' => [
+        'historical' => env('WEATHER_HISTORICAL_FORMATTED_RESPONSE', true),
     ],
 ];

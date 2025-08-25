@@ -121,7 +121,7 @@ class Request
         return $this->units;
     }
 
-    public function withLocale(string $locale = null): Request
+    public function withLocale(?string $locale = null): Request
     {
         $this->locale = $locale;
 

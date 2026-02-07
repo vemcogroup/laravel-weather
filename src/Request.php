@@ -38,24 +38,41 @@ class Request
     {
         $cacheKey = md5('laravel-weather-geocode-' . $this->address);
         try {
-            if (!($this->geocode = Cache::get($cacheKey))) {
-                $response = (new Geocoder(app(Client::class)))
-                    ->setApiKey(config('geocoder.key', ''))
-                    ->getCoordinatesForAddress($this->address);
-                if ($response['lat'] === 0 && $response['lng'] === 0) {
-                    throw WeatherException::invalidAddress($this->address, $response['formatted_address']);
-                }
-                Cache::put($cacheKey, $response, now()->addDays(10));
-                $this->geocode = $response;
+            $cachedGeocode = Cache::get($cacheKey);
+
+            if (is_array($cachedGeocode) && isset($cachedGeocode['lat'], $cachedGeocode['lng'])) {
+                $this->geocode = $cachedGeocode;
+
+                return;
             }
+
+            if ($cachedGeocode === false) {
+                throw WeatherException::invalidAddress($this->address, 'cached geocode lookup failed');
+            }
+
+            $response = (new Geocoder(app(Client::class)))
+                ->setApiKey(config('geocoder.key', ''))
+                ->getCoordinatesForAddress($this->address);
+            if ($response['lat'] === 0 && $response['lng'] === 0) {
+                throw WeatherException::invalidAddress($this->address, $response['formatted_address']);
+            }
+            Cache::put($cacheKey, $response, now()->addDays(10));
+            $this->geocode = $response;
+        } catch (WeatherException $exception) {
+            Cache::put($cacheKey, false, now()->addHours(1));
+
+            throw $exception;
         } catch (\Exception $e) {
+            Cache::put($cacheKey, false, now()->addHours(1));
             throw WeatherException::invalidAddress($this->address, $e->getMessage());
         }
     }
 
     protected function getMidday(): Carbon
     {
-        return now()->setHour(config('weather.midday.hour'))->setMinute(config('weather.midday.minute'));
+        return now()
+            ->setHour((int) config('weather.midday.hour'))
+            ->setMinute((int) config('weather.midday.minute'));
     }
 
     public function getHttpQuery($type = 'GET'): string

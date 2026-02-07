@@ -1,0 +1,14 @@
+{
+    "results": [
+        {
+            "formatted_address": "Unknown place",
+            "geometry": {
+                "location": {
+                    "lat": 0,
+                    "lng": 0
+                }
+            }
+        }
+    ],
+    "status": "OK"
+}

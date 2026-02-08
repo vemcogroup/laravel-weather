@@ -10,6 +10,7 @@ use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
 {
+    public const GEOCODE_LOOKUP_FAILED_CACHE_VALUE = '__geocode_lookup_failed__';
 
     private $url;
     private $key;
@@ -46,7 +47,7 @@ class Request
                 return;
             }
 
-            if ($cachedGeocode === false) {
+            if ($cachedGeocode === self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE) {
                 throw WeatherException::invalidAddress($this->address, 'cached geocode lookup failed');
             }
 
@@ -59,11 +60,11 @@ class Request
             Cache::put($cacheKey, $response, now()->addDays(10));
             $this->geocode = $response;
         } catch (WeatherException $exception) {
-            Cache::put($cacheKey, false, now()->addHours(1));
+            Cache::put($cacheKey, self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE, now()->addHours(1));
 
             throw $exception;
         } catch (\Exception $e) {
-            Cache::put($cacheKey, false, now()->addHours(1));
+            Cache::put($cacheKey, self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE, now()->addHours(1));
             throw WeatherException::invalidAddress($this->address, $e->getMessage());
         }
     }

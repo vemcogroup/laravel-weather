@@ -28,7 +28,7 @@ class RequestTest extends TestCase
             $this->assertStringContainsString('Invalid address', $exception->getMessage());
         }
 
-        $this->assertFalse(Cache::get($cacheKey));
+        $this->assertSame(Request::GEOCODE_LOOKUP_FAILED_CACHE_VALUE, Cache::get($cacheKey));
 
         $this->expectException(WeatherException::class);
         $this->expectExceptionMessage('cached geocode lookup failed');

@@ -4,6 +4,7 @@ namespace Vemcogroup\Weather\Tests\Providers;
 
 use Carbon\Carbon;
 use Vemcogroup\Weather\Request;
+use Vemcogroup\Weather\Providers\Provider;
 use Vemcogroup\Weather\Providers\WeatherKit;
 use Vemcogroup\Weather\Exceptions\WeatherException;
 use function weather;
@@ -77,5 +78,21 @@ class WeatherKitTest extends ProviderTest
 
         $responses = (new WeatherKit)->getForecast($requests);
         $this->checkWeatherResponse($responses);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldMapExtendedConditionCodesToIcons(): void
+    {
+        $provider = new class extends WeatherKit {
+            public function mapIcon(string $conditionCode): string
+            {
+                return $this->convertIcon($conditionCode);
+            }
+        };
+
+        $this->assertSame(Provider::WEATHER_ICON_SLEET, $provider->mapIcon('WintryMix'));
+        $this->assertSame(Provider::WEATHER_ICON_WIND, $provider->mapIcon('Thunderstorms'));
     }
 }

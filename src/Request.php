@@ -10,6 +10,7 @@ use Vemcogroup\Weather\Exceptions\WeatherException;
 
 class Request
 {
+    public const GEOCODE_LOOKUP_FAILED_CACHE_VALUE = '__geocode_lookup_failed__';
 
     private $url;
     private $key;
@@ -38,24 +39,41 @@ class Request
     {
         $cacheKey = md5('laravel-weather-geocode-' . $this->address);
         try {
-            if (!($this->geocode = Cache::get($cacheKey))) {
-                $response = (new Geocoder(app(Client::class)))
-                    ->setApiKey(config('geocoder.key', ''))
-                    ->getCoordinatesForAddress($this->address);
-                if ($response['lat'] === 0 && $response['lng'] === 0) {
-                    throw WeatherException::invalidAddress($this->address, $response['formatted_address']);
-                }
-                Cache::put($cacheKey, $response, now()->addDays(10));
-                $this->geocode = $response;
+            $cachedGeocode = Cache::get($cacheKey);
+
+            if (is_array($cachedGeocode) && isset($cachedGeocode['lat'], $cachedGeocode['lng'])) {
+                $this->geocode = $cachedGeocode;
+
+                return;
             }
+
+            if ($cachedGeocode === self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE) {
+                throw WeatherException::invalidAddress($this->address, 'cached geocode lookup failed');
+            }
+
+            $response = (new Geocoder(app(Client::class)))
+                ->setApiKey(config('geocoder.key', ''))
+                ->getCoordinatesForAddress($this->address);
+            if ($response['lat'] === 0 && $response['lng'] === 0) {
+                throw WeatherException::invalidAddress($this->address, $response['formatted_address']);
+            }
+            Cache::put($cacheKey, $response, now()->addDays(10));
+            $this->geocode = $response;
+        } catch (WeatherException $exception) {
+            Cache::put($cacheKey, self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE, now()->addHours(1));
+
+            throw $exception;
         } catch (\Exception $e) {
+            Cache::put($cacheKey, self::GEOCODE_LOOKUP_FAILED_CACHE_VALUE, now()->addHours(1));
             throw WeatherException::invalidAddress($this->address, $e->getMessage());
         }
     }
 
     protected function getMidday(): Carbon
     {
-        return now()->setHour(config('weather.midday.hour'))->setMinute(config('weather.midday.minute'));
+        return now()
+            ->setHour((int) config('weather.midday.hour'))
+            ->setMinute((int) config('weather.midday.minute'));
     }
 
     public function getHttpQuery($type = 'GET'): string

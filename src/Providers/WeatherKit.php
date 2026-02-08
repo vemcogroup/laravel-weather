@@ -200,7 +200,9 @@ class WeatherKit extends Provider
             "SevereThunderstorm" => self::WEATHER_ICON_WIND,
             "Thunderstorm" => self::WEATHER_ICON_WIND,
             "Tornado" => self::WEATHER_ICON_WIND,
-            "TropicalStorm" => self::WEATHER_ICON_WIND
+            "TropicalStorm" => self::WEATHER_ICON_WIND,
+            "Thunderstorms" => self::WEATHER_ICON_WIND,
+            "WintryMix" => self::WEATHER_ICON_SLEET,
         ];
 
         return $map[$conditionCode] ?? self::WEATHER_ICON_NA;
